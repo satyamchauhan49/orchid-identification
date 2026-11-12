@@ -9,17 +9,19 @@ from PIL import Image, ImageDraw
 FEATURES = ("T", "NF", "In", "LC", "CF", "CL")
 
 
-def create(root):
+def create(root, integration=False):
     root = Path(root)
     if root.exists() and any(root.iterdir()):
         raise ValueError("Choose an empty demo data folder")
     (root / "images").mkdir(parents=True)
     labels = {"species": [f"DEMO_species_{i:03d}" for i in range(156)],
               **{f: [f"DEMO_{f}_{i}" for i in range(3)] for f in FEATURES}}
+    if integration:
+        labels = {k: [v.replace("DEMO_", "SYNTHETIC_") for v in values] for k, values in labels.items()}
     rng = np.random.default_rng(42)
     rows, reference = [], {}
     sums, squares, count = np.zeros(3), np.zeros(3), 0
-    for split, n in (("train", 16), ("calib", 12), ("val", 12), ("test", 12)):
+    for split, n in (("train", 16), ("calib", 128 if integration else 12), ("val", 12), ("test", 12)):
         for i in range(n):
             species = i % 4
             array = rng.integers(12, 48, (224, 224, 3), dtype=np.uint8)
@@ -50,7 +52,8 @@ def create(root):
         writer.writeheader()
         writer.writerows(rows)
     taxonomy = {labels["species"][s]: {f: {labels[f][(s+j) % 3]: 1.0} for j, f in enumerate(FEATURES)} for s in range(4)}
-    for name, value in (("label_maps.json", labels), ("taxonomy.json", taxonomy),
+    exported_maps = {"species": labels["species"], "features": {f: labels[f] for f in FEATURES}} if integration else labels
+    for name, value in (("label_maps.json", exported_maps), ("taxonomy.json", taxonomy),
                         ("reference_images.json", reference), ("normalization.json", {"mean": mean.tolist(), "std": std.tolist(), "source": "train only", "demo": True})):
         (root / name).write_text(json.dumps(value, indent=2), encoding="utf-8")
     return root
@@ -59,4 +62,6 @@ def create(root):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", default="data/sneha_demo")
-    create(parser.parse_args().output)
+    parser.add_argument("--integration", action="store_true")
+    args = parser.parse_args()
+    create(args.output, args.integration)

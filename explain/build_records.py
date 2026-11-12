@@ -16,7 +16,8 @@ def probabilities(values, size, name):
 
 def build(input_path, taxonomy_path, references_path, assets_root, output, checkpoint=None, locked_test=False):
     source = json.loads(Path(input_path).read_text(encoding="utf-8"))
-    labels = source["label_maps"]
+    from models_other.label_contract import normalize_maps
+    labels = normalize_maps(source["label_maps"])
     demo = source["mode"] == "demo"
     if source["mode"] not in ("demo", "real"):
         raise ValueError("mode must be demo or real")
@@ -80,7 +81,7 @@ def build(input_path, taxonomy_path, references_path, assets_root, output, check
                       "overlays": {head: f"cam/{head}_overlay.png" for head in ("species", "CF", "CL")},
                       "cam_predictions": cam["heads"]}
             # Prevent accidentally illustrating a real resolver record with another model.
-            if not demo:
+            if not demo or source.get("provenance", {}).get("resolver") == "c-resolver":
                 for head, expected in (("species", candidates[0]), *[(s["feature"], s["observed_value"]) for s in signals if s["feature"] in ("CF", "CL")]):
                     if cam["heads"][head]["label"] != expected:
                         raise ValueError("Resolver labels differ from checkpoint predictions; confirm model/normalization/class order")
@@ -89,11 +90,11 @@ def build(input_path, taxonomy_path, references_path, assets_root, output, check
                   "taxonomic": signals, "contrastive": {"signals": contrast, "references": reference_files},
                   "visual": visual, "decision": {"stage": item["stage"], "fused_confidence": confidence,
                     "final_species": item.get("final_species"), "reason": item["reason"],
-                    "source": "simulated resolver; not evaluated" if demo else "supplied by Satyam's resolver"},
+                    "source": "c-resolver on synthetic model outputs" if source.get("provenance", {}).get("resolver") == "c-resolver" and demo else "simulated resolver; not evaluated" if demo else "supplied by Satyam's resolver"},
                   "directory": directory.name}
         (directory / "record.json").write_text(json.dumps(record, indent=2, allow_nan=False), encoding="utf-8")
         results.append(record)
-    (output / "records.json").write_text(json.dumps({"mode": source["mode"], "records": results}, indent=2), encoding="utf-8")
+    (output / "records.json").write_text(json.dumps({"mode": source["mode"], "provenance": source.get("provenance", {}), "records": results}, indent=2), encoding="utf-8")
     return output / "records.json"
 
 

@@ -22,7 +22,7 @@ def build(comparison_path, records_path, output):
     shutil.copyfile(comparison_path.parent / "comparison.csv", output / "comparison.csv")
     from models_other.plots import create
     create(comparison_path, output / "figures")
-    payload = {"mode": mode, "comparison": comparison, "records": records["records"]}
+    payload = {"mode": mode, "comparison": comparison, "records": records["records"], "provenance": records.get("provenance", {})}
     serialized = json.dumps(payload, ensure_ascii=True).replace("<", "\\u003c")
     template = Path("site/template.html").read_text(encoding="utf-8")
     figure_links = '<p><a href="figures/comparison.png">Comparison figure</a> · <a href="figures/learning_curves.png">Learning curves</a> · <a href="figures/confusion_CF.png">CF confusion matrix</a> · <a href="figures/confusion_CL.png">CL confusion matrix</a></p>'
@@ -54,7 +54,11 @@ def build(comparison_path, records_path, output):
                "Real final work requires Agrim's audited splits, labels, final checkpoint and train-only normalization; Satyam's calibrated BN/resolver outputs; a suitable GPU; and human inspection of CL attention on the labellum. Missing references/taxonomy cannot be invented.",
                "Satyam supplies final evaluation JSON, calibration, uncertainty, BN/fusion tables and best-model justification. Review his R4, reliability diagrams and risk-coverage curve; review Agrim's R2. Real test explanations are produced only after Sync 4. Website publication and team merges remain separate actions.",
                "", "## Input provenance", json.dumps(comparison["input_sha256"], indent=2)]
-    (output / "report.md").write_text("\n".join(report), encoding="utf-8")
+    report_text = "\n".join(report)
+    if records.get("provenance", {}).get("resolver") == "c-resolver":
+        report_text = report_text.replace("Demo resolver cases are simulated independently of model predictions.",
+            "Resolver cases come from the actual frozen C pipeline on B's synthetic image-model outputs. All decisions retain map, model, artifact and bundle provenance. Only observed stages are shown.")
+    (output / "report.md").write_text(report_text, encoding="utf-8")
     # Only calib/val are opened here. Test files are inventoried without reading scores.
     inventory = []
     for row in comparison["rows"]:

@@ -1,5 +1,9 @@
 # Sneha's local starter
 
+Integration update: see INTEGRATION_B_C.md. The loader accepts the shared nested
+`features` label map as well as legacy flat demos. New model exports include exact
+label-map, manifest and checkpoint hashes for C's loader and explanation verification.
+
 Nothing in this setup is committed or pushed. The Desktop copy is your working copy;
 the original Downloads copy is separate. Work in this Desktop folder from now on.
 

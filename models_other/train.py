@@ -2,6 +2,7 @@
 import argparse
 import json
 import random
+import hashlib
 from pathlib import Path
 
 import numpy as np
@@ -25,15 +26,8 @@ def seed_everything(seed):
 
 
 def load_labels(path):
-    """Proposed schema: each key maps to an ordered list of class names."""
-    labels = json.loads(Path(path).read_text(encoding="utf-8"))
-    for key in ("species", *FEATURES):
-        values = labels.get(key)
-        if not isinstance(values, list) or not values or len(set(values)) != len(values):
-            raise ValueError(f"{key} must contain a nonempty ordered list of unique labels")
-    if len(labels["species"]) != 156:
-        raise ValueError("Real-data mode expects 156 species")
-    return labels
+    from models_other.label_contract import read_maps
+    return read_maps(path)
 
 
 class OrchidDataset(Dataset):
@@ -137,7 +131,7 @@ def validation_loss(model, loader, device):
 
 
 @torch.no_grad()
-def export_logits(model, loader, path, device, labels):
+def export_logits(model, loader, path, device, labels, provenance=None):
     """Only export raw scores; never calculate test metrics here."""
     model.eval()
     ids, blocks, embeddings = [], {k: [] for k in labels}, []
@@ -149,6 +143,7 @@ def export_logits(model, loader, path, device, labels):
             blocks[key].append(values.cpu().numpy())
     arrays = {"ids": np.asarray(ids), "embeddings": np.concatenate(embeddings)}
     arrays.update({"species_logits" if k == "species" else f"logits_{k}": np.concatenate(v) for k, v in blocks.items()})
+    arrays.update({k: np.asarray(v) for k, v in (provenance or {}).items()})
     np.savez_compressed(path, **arrays)
 
 
@@ -236,8 +231,13 @@ def main():
             torch.save(checkpoint, output / "best.pt")
         print(f"Epoch {epoch + 1}: validation loss {val_loss:.4f}")
     model.load_state_dict(torch.load(output / "best.pt", map_location=device, weights_only=True)["model"])
+    map_hash = hashlib.sha256(Path(args.label_maps).read_bytes()).hexdigest() if args.label_maps else hashlib.sha256(json.dumps(labels, sort_keys=True).encode()).hexdigest()
+    provenance = {"label_maps_sha256": map_hash,
+                  "checkpoint_sha256": hashlib.sha256((output / "best.pt").read_bytes()).hexdigest()}
+    if args.manifest:
+        provenance["manifest_sha256"] = hashlib.sha256(Path(args.manifest).read_bytes()).hexdigest()
     for split in ("calib", "val", "test"):
-        export_logits(model, loaders[split], output / f"{split}.npz", device, labels)
+        export_logits(model, loaders[split], output / f"{split}.npz", device, labels, provenance)
     # Validation only: the test exports stay locked.
     from models_other.metrics import classification_metrics
     targets_by_head = {key: [] for key in labels}

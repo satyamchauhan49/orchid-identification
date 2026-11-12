@@ -1,5 +1,10 @@
 # Input from Satyam: proposed exchange format, agree before final integration
 
+Integration update: `python -m explain.from_resolver` now converts C's actual pipeline
+evaluation, decisions and posterior sidecar files into this format. See
+INTEGRATION_B_C.md for commands and hash/provenance requirements. Nested feature maps
+from C are accepted; labels are normalized internally without reordering.
+
 Top-level JSON: mode (real/demo), label_maps (same ordered lists as training), cases.
 Each case must include:
 
