@@ -22,3 +22,7 @@ research results. No real test set has been opened. New changes are uncommitted.
 Added: smoothed binary TPR/TNR detector baseline and paired group-bootstrap CIs.
 Synthetic checks cover analytic likelihoods, missing evidence, unsupported states,
 whole-cluster resampling, zero coverage and non-estimable one-group intervals.
+
+Added synthetic stress runner and development input audit. Six perturbation scenarios
+retain the frozen policy; sparse-supervision checks validate uniform fallback and T=1.
+No synthetic scenario is a real robustness finding. Confidence can still be wrong.

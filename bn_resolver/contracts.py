@@ -59,10 +59,17 @@ def truth(rows, ids, maps, key):
 def load_bundle(path, rows, maps, split, map_hash):
     """Never loads pickle; exact IDs, dimensions and label-map hash are mandatory."""
     with np.load(path,allow_pickle=False) as z:
+        required={'ids','species_logits','label_maps_sha256',*('logits_'+f for f in FEATURES)}
+        if not required <= set(z.files):
+            raise ValueError('Bundle missing required keys: '+', '.join(sorted(required-set(z.files))))
+        if z['ids'].dtype.kind not in 'US':
+            raise ValueError('Bundle IDs must be strings')
         ids = z['ids'].astype(str)
         if ids.ndim != 1 or len(set(ids)) != len(ids):
             raise ValueError("Bundle IDs must be unique")
         expected = {r['image_id'] for r in rows if r['split']==split}
+        if not len(ids):
+            raise ValueError('Bundle split must not be empty')
         if set(ids) != expected:
             raise ValueError(f"{split}: bundle IDs do not exactly match manifest")
         if str(z['label_maps_sha256'].item()) != map_hash:

@@ -140,3 +140,31 @@ models/policy fixed and does not estimate training or model-selection uncertaint
 Choose meaningful groups before evaluation; pHash groups cannot capture every
 source of dependence. Broader source grouping for CIs does not change the existing
 phash-based fitting partitions; audit source leakage separately before real runs.
+
+## Input audit and synthetic stress scenarios
+
+Read-only real/development input audit (no test bundle accepted):
+
+```sh
+python -m bn_resolver.audit --maps work/synthetic/label_maps.json --manifest work/synthetic/split_manifest.csv --calib work/synthetic/calib.npz --val work/synthetic/val.npz --output work/input-audit.json
+```
+
+Run dummy stress checks after the experiment suite; use your existing frozen artifact:
+
+```sh
+python -m eval.stress --maps work/synthetic/label_maps.json --manifest work/synthetic/split_manifest.csv --calib work/synthetic/calib.npz --val work/synthetic/val.npz --artifact work/demo-run-01/frozen_direct_soft.json --output work/stress-run-01
+```
+
+Adjust the artifact path to the run you actually created and use a new output directory.
+Stress accepts synthetic maps only. Real integration uses `eval.experiments`, not
+synthetic perturbations. The audit command accepts either kind of development input.
+
+Six scenarios hold the policy frozen: baseline, uninformative features, noisy CF/CL,
+conflicting confident DNN, confidently wrong features and all-uniform logits.
+Separate support checks cover absent TRAIN annotations and low calibration support.
+These checks can expose confident failures but do not establish real robustness.
+Uniform binary heads remain above the current 0.4 mask; this is explicitly reported.
+
+Bundle errors now name missing arrays and reject numeric IDs and empty split bundles.
+Audit reports missing/rare species, missing labels, constant logits and temperature
+support. It does not verify checkpoint or preprocessing identity; the team must do so.
