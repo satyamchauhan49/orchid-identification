@@ -41,3 +41,19 @@ def render(folder):
     fig.suptitle(banner,fontsize=12,fontweight='bold')
     fig.savefig(root/'bn_comparison.png',dpi=170)
     plt.close(fig)
+
+    if 'calibration_ablations' in data:
+        fig,axes=plt.subplots(1,3,figsize=(14,4.8),layout='constrained')
+        pairs=[('DNN','dnn_raw','dnn_temperature'),
+               ('BN posterior','bn_calibrated_heads','bn_temperature'),
+               ('Fused posterior','fusion_before_temperature','fusion_temperature')]
+        for ax,(title,before,after) in zip(axes,pairs):
+            for key,label in [(before,'Before temperature'),(after,'After temperature')]:
+                points=[r for r in data['calibration_ablations'][key] if r['count']]
+                ax.plot([r['confidence'] for r in points],[r['accuracy'] for r in points],marker='o',label=label)
+            ax.plot([0,1],[0,1],'--',color='gray',linewidth=1)
+            ax.set(title=title,xlabel='Mean confidence',ylabel='Observed accuracy',xlim=(0,1),ylim=(0,1))
+            ax.legend(fontsize=8)
+        fig.suptitle(banner+'\nE4: independent validation reliability',fontsize=12,fontweight='bold')
+        fig.savefig(root/'calibration_ablations.png',dpi=170)
+        plt.close(fig)

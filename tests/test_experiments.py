@@ -44,7 +44,7 @@ class ExperimentChecks(unittest.TestCase):
                 self.assertTrue(intervals['estimable'])
                 self.assertEqual(intervals['data_kind'],'synthetic_demo')
                 self.assertEqual(intervals['intervals']['accuracy_delta']['valid_resamples'],1000)
-                for file in ('calibration_and_risk.png','bn_comparison.png'):
+                for file in ('calibration_and_risk.png','bn_comparison.png','calibration_ablations.png'):
                     self.assertGreater(Path('run-one',file).stat().st_size,1000)
                 examples=json.loads(Path('run-one/example_records.json').read_text())
                 self.assertEqual(len(examples),10)

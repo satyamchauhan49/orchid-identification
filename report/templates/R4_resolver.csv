@@ -1,0 +1,7 @@
+status,variant,split,n,proposed_accuracy,accepted,coverage,deferral_rate,accepted_accuracy,weight,threshold,run_id
+PENDING_REAL_DATA,dnn,,,,,,,,,,
+PENDING_REAL_DATA,bn,,,,,,,,,,
+PENDING_REAL_DATA,rank_only,,,,,,,,,,
+PENDING_REAL_DATA,fusion_only,,,,,,,,,,
+PENDING_REAL_DATA,fusion_selective,,,,,,,,,,
+PENDING_REAL_DATA,dnn_selective,,,,,,,,,,

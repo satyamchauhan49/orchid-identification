@@ -1,0 +1,4 @@
+status,model,test_n,accuracy,accuracy_ci_low,accuracy_ci_high,accepted_accuracy,coverage,deferral_rate,paired_delta_ci_low,paired_delta_ci_high,mcnemar_p,artifact_hash
+PENDING_REAL_DATA,baseline_dnn,,,,,,,,,,,
+PENDING_REAL_DATA,final_fusion,,,,,,,,,,,
+PENDING_REAL_DATA,final_selective,,,,,,,,,,,

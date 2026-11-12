@@ -118,6 +118,11 @@ def evaluate(args):
                   features_used={f:bool(used[f][j]) for f in FEATURES})
              for j,(i,p,a,s) in enumerate(zip(ids,proposed,accepted,stages))]
     write_json(str(args.output)+'.decisions.json',records)
+    # Ignored large-file handoff for Sneha's real explanation integration.
+    np.savez_compressed(str(args.output)+'.posteriors.npz',ids=ids,
+        dnn=dnn,bn=bn,fused=fused,
+        label_maps_sha256=np.array(digest(args.maps)),
+        artifact_sha256=np.array(digest(args.artifact)))
     print(f"Evaluated {len(ids)} {args.split} rows -> {args.output}")
 
 

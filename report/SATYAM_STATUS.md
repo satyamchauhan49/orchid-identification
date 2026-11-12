@@ -1,28 +1,15 @@
-# Role C progress
+# Role C status
 
-Implemented locally: 156-class contracts; per-head calibration; four BN evidence
-variants; fusion and deferral; development E3/E4/E5 runners; R3/R4-style CSV exports;
-per-value feature metrics; reliability, risk-coverage and BN charts; explanation
-records; input hashes; group-preserving three-stage calibration; guarded final
-bootstrap/McNemar evaluation.
+Independent work from the plan is prepared: calibration/BN/resolver implementation,
+E3-E5 runners and plots, binary evidence and rank baselines, grouped bootstrap and
+McNemar, guarded final evaluator, input audit, dummy stress checks, optional NumPy
+arbiter, report methods/equations, limitations/future work, R1-R4/final blank templates,
+best-model justification template, locked-test procedure and local fresh-clone check.
 
-Exercised with synthetic data only. Fixtures include unequal feature domains,
-missing labels, wrong predictions and uninformative evidence. Tests check numerical
-invariants, wrong split/shape/hash rejection, group isolation and the test lock.
+See PLAN_COMPLETION.md for every plan task and its dependency. See
+FRESH_CLONE_VERIFICATION.md for evidence and limits of the reproduction check.
+The actual final tables/claims, selected-model justification and locked test remain
+pending Agrim/Sneha inputs; no synthetic values fill real-result templates.
 
-Remaining real-data work: Agrim's audited maps/manifest/annotations; baseline logits
-from Agrim and Sneha; class/support review; actual E3-E5 analysis; frozen model
-choice; real visual explanations; final locked evaluation; measured report tables
-and best-model justification. Selected-value binary evidence is implemented on the simplified BN; the full paper graph is not reproduced.
-
-See SATYAM_METHODS_DRAFT.md for the report text with placeholders and
-REAL_DATA_HANDOFF.md for integration commands. Synthetic metrics are never final
-research results. No real test set has been opened. New changes are uncommitted.
-
-Added: smoothed binary TPR/TNR detector baseline and paired group-bootstrap CIs.
-Synthetic checks cover analytic likelihoods, missing evidence, unsupported states,
-whole-cluster resampling, zero coverage and non-estimable one-group intervals.
-
-Added synthetic stress runner and development input audit. Six perturbation scenarios
-retain the frozen policy; sparse-supervision checks validate uniform fallback and T=1.
-No synthetic scenario is a real robustness finding. Confidence can still be wrong.
+New work is local and uncommitted. No teammate-owned data/training/site folder is
+changed. Source and requirements are prepared for review on c-resolver.

@@ -188,11 +188,13 @@ def run(args):
     fused_c = fuse(dc,bct,policy['weight'])
     fused_v = fuse(dv,bvt,policy['weight'])
     fusion_t = fit_temperature(np.log(np.maximum(fused_c[fw],1e-12)),cy[fw])
+    calibration_curves={}
     for name,p in [('dnn_raw',raw_dnn),('dnn_temperature',dv),
                    ('bn_raw_heads',raw_bn),('bn_calibrated_heads',bv),
                    ('bn_temperature',bvt),('fusion_before_temperature',fused_v),
                    ('fusion_temperature',softmax(np.log(np.maximum(fused_v,1e-12))/fusion_t['temperature']))]:
         e4.append(score(name,p,vy,kind))
+        calibration_curves[name]=reliability(p,vy)
     # E5 uses head-calibrated DNN and BN (without extra BN/fusion temperature),
     # keeping the frozen base pipeline interoperable with its original CLI.
     policy,_ = fit_policy(dc[fw],bc[fw],cy[fw],args.risk,args.minimum)
@@ -238,7 +240,7 @@ def run(args):
     write_json(out/'example_records.json',explain)
     write_json(out/'calibration_diagnostics.json',dict(bn=bn_t,fusion=fusion_t,
         warning='BN temperature reuses cal_model used for head temperatures and CPTs; fusion temperature reuses cal_fusion used for weight. Validation is independent. E4 is diagnostic, not the frozen E5 policy.'))
-    plot_data = dict(data_kind=kind,
+    plot_data = dict(data_kind=kind,calibration_ablations=calibration_curves,
         reliability={n:reliability(p,vy) for n,p in [('DNN raw',raw_dnn),('DNN calibrated',dv),('BN calibrated heads',bv),('Fusion',f)]},
         risk_coverage={n:risk_coverage(p,vy) for n,p in [('DNN',dv),('BN',bv),('Fusion',f)]})
     write_json(out/'plot_data.json',plot_data)

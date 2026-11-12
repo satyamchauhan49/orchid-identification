@@ -168,3 +168,32 @@ Uniform binary heads remain above the current 0.4 mask; this is explicitly repor
 Bundle errors now name missing arrays and reject numeric IDs and empty split bundles.
 Audit reports missing/rare species, missing labels, constant logits and temperature
 support. It does not verify checkpoint or preprocessing identity; the team must do so.
+
+## Report and handoff completion
+
+C's final methods text is `report/SATYAM_METHODS.md`. Limitations/future work,
+best-model paragraph template, locked-test procedure and unfilled R1-R4/final
+CSV templates are under report/. Real results remain pending; no dummy figures
+are inserted into real result templates. The evaluator additionally writes
+`<result>.posteriors.npz` with IDs, DNN/BN/fused probabilities and hashes for
+Sneha's explanation integration. This file is ignored by Git and belongs in the
+team's agreed large-file sharing location.
+
+E4 now exports `calibration_ablations.png` for DNN, BN posterior and fused-posterior
+temperature comparisons; read the fitting-reuse caveats in the run report.
+
+The plan's optional logistic-regression arbiter is available as a separate NumPy
+prototype. It does not alter the default fusion/deferral policy:
+
+```sh
+python -m eval.optional_arbiter --maps work/synthetic/label_maps.json --manifest work/synthetic/split_manifest.csv --calib work/synthetic/calib.npz --val work/synthetic/val.npz --artifact work/demo-run-01/frozen_direct_soft.json --output work/optional-arbiter.json
+```
+
+It fits DNN margin, BN margin, evidence log-likelihood gap and minimum feature
+confidence on cal_fusion decisive disagreements. Both-wrong disagreements supply
+no training target; insufficient support falls back to DNN. Its candidate-choice
+score is not calibrated correctness or an acceptance probability. Treat it as an
+optional development comparison; promotion requires independent selection/freezing.
+
+See report/PLAN_COMPLETION.md for the required-plan checklist and remaining
+input-dependent tasks. No CI, website or teammates' training code is added here.
