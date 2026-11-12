@@ -1,7 +1,10 @@
 .venv/
 .idea/
 __pycache__/
+*.py[cod]
 data/
+datasets/
+work/
 outputs/
 *.pt
 *.pth

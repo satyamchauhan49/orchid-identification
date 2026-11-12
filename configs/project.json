@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "expected_species_count": 156,
+  "features": ["T", "NF", "In", "LC", "CF", "CL"],
+  "seed": 42,
+  "missing_confidence": 0.4,
+  "risk_target": 0.015,
+  "minimum_accepted": 50,
+  "bootstrap_resamples": 1000
+}

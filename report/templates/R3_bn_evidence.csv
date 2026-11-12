@@ -1,0 +1,6 @@
+status,variant,missing_confidence,split,n,top1,top3,top5,ece,run_id
+PENDING_REAL_DATA,hard_direct,,,,,,,,
+PENDING_REAL_DATA,hard_confusion,,,,,,,,
+PENDING_REAL_DATA,direct_soft,,,,,,,,
+PENDING_REAL_DATA,virtual_soft,,,,,,,,
+PENDING_REAL_DATA,binary_tpr_tnr,,,,,,,,

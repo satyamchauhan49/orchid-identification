@@ -1,0 +1,4 @@
+status,model,split,n,feature,value,tpr,tnr,macro_f1,species_top1,bn_top1,run_id
+PENDING_REAL_DATA,resnet18_base,,,,,,,,,,
+PENDING_REAL_DATA,effb0_base,,,,,,,,,,
+PENDING_REAL_DATA,convnext_t_base,,,,,,,,,,
