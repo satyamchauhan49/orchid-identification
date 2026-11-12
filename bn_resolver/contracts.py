@@ -25,7 +25,8 @@ def load_maps(path, expected=156):
 
 
 def read_manifest(path, maps):
-    rows = list(csv.DictReader(Path(path).open()))
+    with Path(path).open(newline='') as stream:
+        rows = list(csv.DictReader(stream))
     required = {'image_id','path','species','phash_cluster','split',*FEATURES}
     if not rows or not required <= rows[0].keys():
         raise ValueError(f"Manifest requires {sorted(required)}")

@@ -11,10 +11,9 @@ must come from Agrim's verified `label_maps.json`; synthetic names are only test
 - Satyam: `c-resolver`; owns `bn_resolver/`, `eval/`, Role C tests and report sections.
 - Coordinate root README, requirements and interface changes before merging.
 
-This folder is a new local Git repository on **unborn `c-resolver`** (no commits).
-It is not a clone of shared history. Before publishing, clone the real repository separately,
-create `c-resolver` from its latest `main`, and copy these reviewed files into that clone.
-Do not push this independent history. No commits or pushes were made by Codex.
+This is the shared repository clone on `c-resolver`. Keep Role C changes on this
+branch and review shared contracts with Agrim and Sneha before merging to `main`.
+New development work is left uncommitted and unpushed for Satyam to review.
 
 ## Setup and verification
 
@@ -22,7 +21,7 @@ Python 3.10+; CPU only. From this folder:
 
 ```sh
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m pip install -r requirements-c-resolver.txt
 .venv/bin/python -m unittest discover -s tests -v
 .venv/bin/python -m scripts.make_synthetic
 .venv/bin/python -m bn_resolver.pipeline fit --maps work/synthetic/label_maps.json --manifest work/synthetic/split_manifest.csv --bundle work/synthetic/calib.npz --output work/synthetic/frozen.json
@@ -64,11 +63,38 @@ Export **raw logits**, not softmax probabilities. No pickle objects.
 - Hash and duplicate-group checks. Calibration groups are deterministically split
   into `cal_model` and `cal_policy`; the saved IDs make this auditable.
 
-Run each `--variant` into a separate artifact for E3. Compare development performance
-before choosing one. Tune no choice on test. E4 should compare temperature identity
-versus fitted heads and any additional BN/fused calibration on independent development
-data; the current CLI fits head temperatures only. Plot rendering and full E3/E4/R1-R4
-automation remain follow-up work, alongside botanical and visual explanation integration.
+## Development experiment suite
+
+```sh
+.venv/bin/python -m scripts.make_synthetic
+.venv/bin/python -m eval.experiments --maps work/synthetic/label_maps.json --manifest work/synthetic/split_manifest.csv --calib work/synthetic/calib.npz --val work/synthetic/val.npz --output work/demo-run-01 --synthetic-only
+```
+
+Use a fresh output directory for every run; existing results are not overwritten.
+The demo uses missing annotations, unequal feature domains, wrong DNN guesses,
+and uninformative feature logits. All chart titles and tables mark it synthetic.
+
+The same experiment command accepts real development inputs later: replace the four
+input paths and remove `--synthetic-only`. No model/inference code changes are needed.
+Never supply test logits under calibration/validation names. Exact manifest ID checks
+reject accidental split swaps. No test input argument exists in this development suite.
+
+Outputs: E3/R3 four-variant and masking comparisons; E4 head/BN/fusion temperature
+diagnostics; E5/R4 rank/fusion/selective-DNN comparisons; per-feature TPR/TNR;
+static charts; ten explanation records; a frozen V3 policy and a run ledger with
+input hashes and partition IDs. V3 is prespecified downstream rather than chosen
+from validation and silently re-evaluated as a winner on those same labels.
+
+Group-preserving calibration partitions separate head/CPT fitting (`cal_model`),
+weight fitting (`cal_fusion`), and threshold selection (`cal_threshold`). Smaller
+partitions may make the requested 50-accepted operating point infeasible; that
+is exported honestly as null threshold and all-deferred decisions. BN temperature
+reuses cal_model and diagnostic fusion temperature reuses cal_fusion; E4 records
+these limitations. E4 does not replace the frozen E5 head-calibrated policy.
+
+Still pending: the paper's binary TPR/TNR BN reproduction, real model comparisons,
+neural E2 runs (Agrim), visual Grad-CAM integration (Sneha), and final test findings.
+Categorical hard-confusion V2 is not falsely labelled the original binary baseline.
 
 ## Locked evaluation
 

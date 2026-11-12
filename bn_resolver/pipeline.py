@@ -89,7 +89,8 @@ def evaluate(args):
     policy=artifact['policy']
     fused,proposed,accepted,stages=resolve(dnn,bn,policy['weight'],policy['threshold'])
     rank=(np.argsort(-bn,axis=1)[:,:5]==dnn.argmax(1)[:,None]).any(1)
-    result=dict(split=args.split,kind='measured_predictions',n=len(ids),
+    result=dict(split=args.split,kind=('synthetic_demo' if all(
+                    s.startswith('SYNTHETIC_') for s in maps['species']) else 'measured_predictions'),n=len(ids),
                 artifact_sha256=digest(args.artifact),bundle_sha256=digest(args.bundle),
                 dnn=classification(dnn,y),bn=classification(bn,y),
                 rank_rule=classification(dnn,y,rank),fusion=classification(fused,y),

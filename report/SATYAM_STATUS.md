@@ -1,19 +1,20 @@
 # Role C progress
 
-Implemented and locally testable: contracts, calibration, four BN paths, rank baseline,
-fusion, deferral, validation CLI and guarded final evaluation.
+Implemented locally: 156-class contracts; per-head calibration; four BN evidence
+variants; fusion and deferral; development E3/E4/E5 runners; R3/R4-style CSV exports;
+per-value feature metrics; reliability, risk-coverage and BN charts; explanation
+records; input hashes; group-preserving three-stage calibration; guarded final
+bootstrap/McNemar evaluation.
 
-Pending real inputs: Agrim's audited 156-class maps and manifest; TRAIN feature
-annotations or reviewed taxonomic distributions; baseline calibration/validation logits
-from Agrim and Sneha. No real locked test evaluation has been run.
+Exercised with synthetic data only. Fixtures include unequal feature domains,
+missing labels, wrong predictions and uninformative evidence. Tests check numerical
+invariants, wrong split/shape/hash rejection, group isolation and the test lock.
 
-Next: review class support; compare E3 variants and masking on development data;
-complete E4 BN/fused calibration ablations and charts; freeze E5 policy; integrate
-Sneha's explanation records; perform the agreed locked evaluation and write R3/R4,
-best-model justification and limitations using measured outputs.
+Remaining real-data work: Agrim's audited maps/manifest/annotations; baseline logits
+from Agrim and Sneha; class/support review; actual E3-E5 analysis; frozen model
+choice; real visual explanations; final locked evaluation; measured report tables
+and best-model justification. The paper's binary evidence baseline remains pending.
 
-The plan's literature numbers (87.6%, 9.4%) are reference values, not our measured
-results, and dataset differences must be stated when comparing the 156-species task.
-
-Synthetic fixtures contain 156 fake species solely to check dimensions and flow.
-No claims about orchid recognition accuracy follow from them.
+See SATYAM_METHODS_DRAFT.md for the report text with placeholders and
+REAL_DATA_HANDOFF.md for integration commands. Synthetic metrics are never final
+research results. No real test set has been opened. New changes are uncommitted.
