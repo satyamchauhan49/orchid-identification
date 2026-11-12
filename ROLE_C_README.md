@@ -79,7 +79,7 @@ input paths and remove `--synthetic-only`. No model/inference code changes are n
 Never supply test logits under calibration/validation names. Exact manifest ID checks
 reject accidental split swaps. No test input argument exists in this development suite.
 
-Outputs: E3/R3 four-variant and masking comparisons; E4 head/BN/fusion temperature
+Outputs: E3/R3 four-variant plus binary TPR/TNR and masking comparisons; E4 head/BN/fusion temperature
 diagnostics; E5/R4 rank/fusion/selective-DNN comparisons; per-feature TPR/TNR;
 static charts; ten explanation records; a frozen V3 policy and a run ledger with
 input hashes and partition IDs. V3 is prespecified downstream rather than chosen
@@ -92,7 +92,8 @@ is exported honestly as null threshold and all-deferred decisions. BN temperatur
 reuses cal_model and diagnostic fusion temperature reuses cal_fusion; E4 records
 these limitations. E4 does not replace the frozen E5 head-calibrated policy.
 
-Still pending: the paper's binary TPR/TNR BN reproduction, real model comparisons,
+The selected-value binary TPR/TNR detector mechanism is implemented on our simplified
+BN; reproducing the paper's full learned graph remains out of scope. Still pending: real model comparisons,
 neural E2 runs (Agrim), visual Grad-CAM integration (Sneha), and final test findings.
 Categorical hard-confusion V2 is not falsely labelled the original binary baseline.
 
@@ -114,3 +115,28 @@ Agrim: verified 156-species maps, grouped manifest and TRAIN image-level feature
 or a complete reviewed species-description table. Sneha/Agrim: matching raw baseline
 logits for calibration and validation. Missing annotations remain missing; no fabricated
 species descriptions, checkpoints, or performance figures are used.
+
+## Binary detector baseline and grouped intervals
+
+E3 now includes `binary_tpr_tnr` with masking on/off. For the hard predicted
+category j, the observed detector is J_j=yes. The likelihood vector over true
+categories is TPR_j at j and FPR_j=1-TNR_j elsewhere. Only that selected detector
+is observed; other one-v-rest detectors are not multiplied as independent evidence.
+Calibration-only counts receive Beta(1,1) smoothing; empirical rates remain null
+when unsupported, with support exported in binary_rates.json. This implements
+the paper's section 3.5 mechanism, not a numerical/full-graph reproduction.
+
+`grouped_confidence_intervals.json` reports 1,000 paired whole-group bootstrap
+resamples for baseline/final accuracy, their difference, coverage and accepted
+accuracy. Default group is phash_cluster; use `--group-column source_group` if
+Agrim supplies broader independent units. Every image in each sampled group
+travels together, and unequal group sizes retain image-weighted accuracy.
+With fewer than two groups, CIs are null. With no accepted images in a replicate,
+that replicate is excluded from accepted-accuracy CIs and the valid count is shown.
+
+The final evaluator also accepts `--group-column`; IID intervals and McNemar are
+retained as separate diagnostics with independence caveats. The bootstrap holds
+models/policy fixed and does not estimate training or model-selection uncertainty.
+Choose meaningful groups before evaluation; pHash groups cannot capture every
+source of dependence. Broader source grouping for CIs does not change the existing
+phash-based fitting partitions; audit source leakage separately before real runs.

@@ -57,3 +57,54 @@ def mcnemar_exact(y,baseline,final):
     p=min(1.,2*math.exp(peak)*sum(math.exp(v-peak) for v in logs)) if n else 1.
     return dict(baseline_only_correct=lost,final_only_correct=gained,p_value=p,
                 comparison='Full-coverage baseline versus full-coverage fusion')
+
+
+def grouped_bootstrap(y, baseline, final, groups, accepted=None,
+                      resamples=1000, seed=42):
+    """Paired cluster percentile CIs, sampling whole clusters with replacement.
+
+    Statistic is image-weighted accuracy (ratio of sums), not mean cluster accuracy.
+    Policy and predictions remain frozen; intervals condition on model fitting.
+    """
+    y, baseline, final = map(np.asarray,(y,baseline,final))
+    g = np.asarray(groups)
+    if (y.ndim!=1 or not len(y) or baseline.shape!=y.shape or final.shape!=y.shape
+            or g.shape!=y.shape or g.dtype.kind not in 'US'
+            or any(not str(v).strip() for v in g)):
+        raise ValueError('Require aligned nonempty vectors and nonempty string groups')
+    if resamples<1 or int(resamples)!=resamples:
+        raise ValueError('Positive integer resamples required')
+    a = np.ones(len(y),dtype=bool) if accepted is None else np.asarray(accepted,dtype=bool)
+    if a.shape!=y.shape:
+        raise ValueError('Acceptance mask length mismatch')
+    unique, inverse = np.unique(g,return_inverse=True)
+    count = len(unique)
+    # Aggregate once: all repeated images in a sampled cluster move together.
+    sizes = np.bincount(inverse,minlength=count)
+    correct_base = np.bincount(inverse,weights=baseline==y,minlength=count)
+    correct_final = np.bincount(inverse,weights=final==y,minlength=count)
+    accepted_n = np.bincount(inverse,weights=a,minlength=count)
+    accepted_correct = np.bincount(inverse,weights=a&(final==y),minlength=count)
+    samples = {k:[] for k in ('baseline_accuracy','final_accuracy','accuracy_delta',
+                              'coverage','accepted_accuracy')}
+    rng = np.random.default_rng(seed)
+    # One cluster cannot estimate between-cluster variation.
+    if count>=2:
+        for _ in range(resamples):
+            ix = rng.integers(0,count,count)
+            n = sizes[ix].sum()
+            b, f = correct_base[ix].sum()/n, correct_final[ix].sum()/n
+            an = accepted_n[ix].sum()
+            for k,v in [('baseline_accuracy',b),('final_accuracy',f),
+                        ('accuracy_delta',f-b),('coverage',an/n)]:
+                samples[k].append(float(v))
+            if an: samples['accepted_accuracy'].append(float(accepted_correct[ix].sum()/an))
+    def interval(values):
+        return dict(low=float(np.quantile(values,.025)) if values else None,
+                    high=float(np.quantile(values,.975)) if values else None,
+                    valid_resamples=len(values))
+    return dict(method='paired whole-cluster percentile bootstrap; image-weighted ratios',
+        group_count=count,image_count=len(y),resamples=resamples,seed=seed,
+        estimable=count>=2,
+        intervals={k:interval(v) for k,v in samples.items()},
+        warning='Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included.')

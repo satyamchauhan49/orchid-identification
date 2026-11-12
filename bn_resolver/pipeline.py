@@ -6,7 +6,7 @@ import numpy as np
 from .contracts import FEATURES, digest, load_maps, read_manifest, truth, load_bundle, calibration_partition
 from .core import (softmax, fit_temperature, empirical_theta, confusion_cpt,
                    bn_posterior, fit_policy, resolve, reliability, risk_coverage)
-from eval.metrics import classification, bootstrap_accuracy, mcnemar_exact
+from eval.metrics import classification, bootstrap_accuracy, mcnemar_exact, grouped_bootstrap
 
 
 def write_json(path,value):
@@ -89,16 +89,23 @@ def evaluate(args):
     policy=artifact['policy']
     fused,proposed,accepted,stages=resolve(dnn,bn,policy['weight'],policy['threshold'])
     rank=(np.argsort(-bn,axis=1)[:,:5]==dnn.argmax(1)[:,None]).any(1)
+    group_column=getattr(args,'group_column','phash_cluster')
+    lookup={r['image_id']:r for r in rows}
+    if any(not lookup[str(i)].get(group_column,'').strip() for i in ids):
+        raise ValueError('Missing bootstrap group column: '+group_column)
+    groups=np.array([lookup[str(i)][group_column] for i in ids])
+    grouped_ci=grouped_bootstrap(y,dnn.argmax(1),proposed,groups,accepted)
     result=dict(split=args.split,kind=('synthetic_demo' if all(
                     s.startswith('SYNTHETIC_') for s in maps['species']) else 'measured_predictions'),n=len(ids),
                 artifact_sha256=digest(args.artifact),bundle_sha256=digest(args.bundle),
                 dnn=classification(dnn,y),bn=classification(bn,y),
                 rank_rule=classification(dnn,y,rank),fusion=classification(fused,y),
                 selective=classification(fused,y,accepted),policy=policy,
+                grouped_confidence_intervals=dict(group_column=group_column,**grouped_ci),
                 accuracy_ci=bootstrap_accuracy(y,proposed),
                 accepted_accuracy_ci=bootstrap_accuracy(y,proposed,accepted),
                 mcnemar=mcnemar_exact(y,dnn.argmax(1),proposed),
-                limitations=['IID bootstrap assumes independent images; use grouped bootstrap if source clusters remain correlated.',
+                limitations=['IID CIs and McNemar assume independent images; use grouped intervals for correlated images. Groups themselves must be independent.',
                              'Empirical theta needs adequate TRAIN feature annotations.',
                              'Calibration selection is not a guarantee of test risk.'])
     write_json(args.output,result)
@@ -130,6 +137,7 @@ def main():
             s.add_argument('--artifact',required=True)
             s.add_argument('--split',choices=['val','test'],default='val')
             s.add_argument('--unlock-test',action='store_true')
+            s.add_argument('--group-column',default='phash_cluster')
             s.set_defaults(func=evaluate)
     args=p.parse_args()
     args.func(args)

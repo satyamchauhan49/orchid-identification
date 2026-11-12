@@ -34,12 +34,16 @@ class ExperimentChecks(unittest.TestCase):
                 ledger=json.loads(Path('run-one/run_manifest.json').read_text())
                 self.assertEqual(ledger['data_kind'],'synthetic_demo')
                 self.assertFalse(ledger['test_accessed'])
-                for file,count in [('E3_R3_bn_comparison.csv',8),
+                for file,count in [('E3_R3_bn_comparison.csv',10),
                                    ('E4_calibration.csv',7),('E5_R4_resolver.csv',6)]:
                     with Path('run-one',file).open() as stream:
                         table=list(csv.DictReader(stream))
                     self.assertEqual(len(table),count)
                     self.assertTrue(all(r['data_kind']=='synthetic_demo' for r in table))
+                intervals=json.loads(Path('run-one/grouped_confidence_intervals.json').read_text())
+                self.assertTrue(intervals['estimable'])
+                self.assertEqual(intervals['data_kind'],'synthetic_demo')
+                self.assertEqual(intervals['intervals']['accuracy_delta']['valid_resamples'],1000)
                 for file in ('calibration_and_risk.png','bn_comparison.png'):
                     self.assertGreater(Path('run-one',file).stat().st_size,1000)
                 examples=json.loads(Path('run-one/example_records.json').read_text())

@@ -17,8 +17,10 @@ prior-corrected soft evidence, and confusion with virtual soft evidence. The
 confusion matrix is P(predicted category | true category), normalized by true-state
 columns. The two soft paths are engineering approximations. Masking is compared
 at thresholds 0 and 0.4, with missing evidence contributing one to every species.
-The paper's binary TPR/TNR construction is not yet reproduced and must not be
-identified with our categorical confusion baseline.
+A separate binary baseline now observes the selected detector J_j=yes, with
+likelihood TPR_j for F=j and 1-TNR_j otherwise. Calibration-only counts receive
+Beta(1,1) smoothing. Unselected detectors are unobserved. This reproduces the
+binary CPT mechanism on our simplified graph, not the paper's full learned graph.
 
 ## Calibration and policy
 
@@ -68,3 +70,14 @@ real image and checkpoint integration. Confidence is not a correctness guarantee
 
 Literature values 87.6% and 9.4% come from a different experimental setting and
 must be labelled references, not treated as matched 156-species baselines.
+
+## Grouped uncertainty
+
+Paired whole-cluster percentile bootstrap (1,000 resamples, seed 42) samples
+independent groups with replacement. Image-weighted baseline/final accuracy,
+paired difference, coverage and accepted accuracy are recomputed per replicate.
+The saved group column defaults to phash_cluster; broader source groups may be
+needed. Null intervals and valid-resample counts expose inadequate support.
+These conditional intervals keep the selected model/policy fixed; they do not
+include fitting or selection uncertainty. Audit independence of groups before
+interpreting real-data intervals.

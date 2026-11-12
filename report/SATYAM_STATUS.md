@@ -13,8 +13,12 @@ invariants, wrong split/shape/hash rejection, group isolation and the test lock.
 Remaining real-data work: Agrim's audited maps/manifest/annotations; baseline logits
 from Agrim and Sneha; class/support review; actual E3-E5 analysis; frozen model
 choice; real visual explanations; final locked evaluation; measured report tables
-and best-model justification. The paper's binary evidence baseline remains pending.
+and best-model justification. Selected-value binary evidence is implemented on the simplified BN; the full paper graph is not reproduced.
 
 See SATYAM_METHODS_DRAFT.md for the report text with placeholders and
 REAL_DATA_HANDOFF.md for integration commands. Synthetic metrics are never final
 research results. No real test set has been opened. New changes are uncommitted.
+
+Added: smoothed binary TPR/TNR detector baseline and paired group-bootstrap CIs.
+Synthetic checks cover analytic likelihoods, missing evidence, unsupported states,
+whole-cluster resampling, zero coverage and non-estimable one-group intervals.

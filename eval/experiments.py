@@ -16,7 +16,8 @@ from bn_resolver.contracts import (FEATURES, digest, load_maps, read_manifest,
 from bn_resolver.core import (softmax, fit_temperature, fit_policy, resolve,
                               fuse, reliability, risk_coverage)
 from bn_resolver.pipeline import fit, predict, write_json
-from .metrics import classification
+from .metrics import classification, grouped_bootstrap
+from bn_resolver.binary import fit_binary_rates, binary_posterior
 
 VARIANTS = ('hard_direct', 'hard_confusion', 'direct_soft', 'virtual_soft')
 
@@ -158,6 +159,17 @@ def run(args):
             a['missing_confidence'] = mask
             _, p, _ = predict(va,a)
             e3.append(score(variant,p,vy,kind,missing_confidence=mask))
+    # Binary selected-detector baseline: rates fitted on cal_model only.
+    reference = artifacts['direct_soft']
+    cq = {f:softmax(ca[f]/reference['temperatures'][f]['temperature']) for f in FEATURES}
+    vq = {f:softmax(va[f]/reference['temperatures'][f]['temperature']) for f in FEATURES}
+    binary_rates = {f:fit_binary_rates(cq[f][cm],truth(rows,cid,maps,f)[cm]) for f in FEATURES}
+    write_json(out/'binary_rates.json',dict(data_kind=kind,rates=binary_rates,
+        fit_ids=cid[cm].tolist(),semantics='Selected category detector=yes; other detectors unobserved',
+        limitation='Paper binary CPT mechanism on simplified CLASS-to-feature graph; not full original graph reproduction'))
+    for mask in (0.,.4):
+        binary_p,_ = binary_posterior(reference['prior'],reference['theta'],vq,binary_rates,mask)
+        e3.append(score('binary_tpr_tnr',binary_p,vy,kind,missing_confidence=mask))
     # Prespecified V3 is used downstream; E3 validation winners are not silently
     # retuned on those same validation labels.
     artifact = artifacts['direct_soft']
@@ -206,6 +218,15 @@ def run(args):
                      ('fusion_only',f,None),('fusion_selective',f,accepted),
                      ('dnn_selective',dv,da)]:
         e5.append(score(name,p,vy,kind,a))
+    # Manifest may supply a broader independent source group than pHash clusters.
+    group_column = getattr(args,'group_column','phash_cluster')
+    lookup = {r['image_id']:r for r in rows}
+    if any(not lookup[str(i)].get(group_column,'').strip() for i in vid):
+        raise ValueError('Missing bootstrap group column: '+group_column)
+    groups = np.array([lookup[str(i)][group_column] for i in vid])
+    intervals = grouped_bootstrap(vy,dv.argmax(1),pred,groups,accepted)
+    write_json(out/'grouped_confidence_intervals.json',dict(data_kind=kind,
+        group_column=group_column,**intervals))
     feature_rows = feature_metrics(va,vid,rows,maps,artifact['temperatures'])
     for r in feature_rows:
         r['data_kind']=kind
@@ -228,13 +249,14 @@ def run(args):
         validation_n=len(vid),test_accessed=False,variant_selection='Prespecified direct_soft',
         policy=policy,decision_stages=counts,
         caveats=['Synthetic performance is not orchid research evidence.' if kind=='synthetic_demo' else 'Development analysis only; no test claims.',
-                 'V1 is hard-direct, V2 is full categorical confusion; binary TPR/TNR reproduction of the paper remains unimplemented.',
+                 'V1 is hard-direct, V2 is full categorical confusion; binary_tpr_tnr implements selected-detector virtual evidence on our simplified graph, not the full paper graph.',
                  'Feature metrics are R1-style diagnostics; E2 neural training ablations remain Agrim\'s work.'])
     write_json(out/'run_manifest.json',ledger)
     render(out)
     heading = 'SYNTHETIC DEMONSTRATION - NOT RESEARCH RESULTS' if kind=='synthetic_demo' else 'DEVELOPMENT VALIDATION - NOT FINAL TEST RESULTS'
     text = f'# {heading}\n\n156-class E3/E4/E5 pipeline completed. Test data was not opened.\n\n'
-    text += '## Tables\n\n- E3_R3_bn_comparison.csv: four evidence variants, masking on/off.\n- E4_calibration.csv: DNN, BN and fusion calibration diagnostics.\n- E5_R4_resolver.csv: full and selective baselines.\n- feature_value_metrics.csv: supported per-value TPR/TNR.\n\n'
+    text += '## Tables\n\n- E3_R3_bn_comparison.csv: four categorical/soft variants plus binary TPR/TNR, masking on/off.\n- E4_calibration.csv: DNN, BN and fusion calibration diagnostics.\n- E5_R4_resolver.csv: full and selective baselines.\n- feature_value_metrics.csv: supported per-value TPR/TNR.\n\n'
+    text += 'Grouped paired bootstrap intervals are in grouped_confidence_intervals.json. Whole duplicate/source groups are sampled together; the frozen policy is not refitted.\n\n'
     text += '## Policy and limitations\n\n' + f'Frozen policy feasible: {policy["feasible"]}. Weight: {policy["weight"]}. Threshold: {policy["threshold"]}.\n\n'
     text += 'Temperatures/CPTs use cal_model. Weight uses cal_fusion. Threshold uses cal_threshold. All groups stay together. The E4 BN and fusion temperature diagnostics reuse fitting partitions; validation remains independent. Empirical threshold selection is not a risk guarantee.\n\n'
     text += 'Example records include botanical-distribution evidence, contrastive contributions, and decisions; visual maps await Sneha\'s image/checkpoint integration. See run_manifest.json for hashes and support.\n'
@@ -247,6 +269,7 @@ def main():
     for key in ('maps','manifest','calib','val','output'):
         p.add_argument('--'+key,required=True)
     p.add_argument('--synthetic-only',action='store_true')
+    p.add_argument('--group-column',default='phash_cluster',help='Independent manifest group for bootstrap, e.g. source_group')
     p.add_argument('--risk',type=float,default=.015)
     p.add_argument('--minimum',type=int,default=50)
     a=p.parse_args()

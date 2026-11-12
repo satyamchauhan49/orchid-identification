@@ -26,7 +26,9 @@ mix calibration and validation outputs from different checkpoints.
 The final test CLI remains guarded by `--unlock-test` and requires frozen matching
 map/manifest hashes. It is an accidental-use guard, not a secure vault. Keep test
 labels outside ordinary development access. The final evaluator has IID bootstrap
-and exact full-coverage McNemar; correlated source clusters require grouped CIs.
+and exact full-coverage McNemar; grouped CIs are now included. Supply --group-column source_group for broader
+independent source units; group IDs must be nonempty for every evaluated image.
+The default is phash_cluster.
 
 Review updated files on c-resolver before committing. Synthetic arrays, dependency
 installs and generated run outputs live in ignored work/. Nothing is auto-pushed.
