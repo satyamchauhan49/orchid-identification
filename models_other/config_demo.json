@@ -1,0 +1,17 @@
+{
+  "mode": "demo",
+  "manifest": "data/sneha_demo/split_manifest.csv",
+  "label_maps": "data/sneha_demo/label_maps.json",
+  "normalization": "data/sneha_demo/normalization.json",
+  "data_root": "data/sneha_demo",
+  "output": "outputs/demo_grid",
+  "backbones": ["efficientnet_b0", "convnext_tiny"],
+  "learning_rates": [0.001, 0.0003, 0.0001],
+  "epochs": 1,
+  "batch_size": 4,
+  "threads": 2,
+  "loss": "ce",
+  "sampler": "plain",
+  "pretrained": false,
+  "amp": false
+}

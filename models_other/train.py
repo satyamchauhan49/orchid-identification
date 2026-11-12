@@ -155,6 +155,8 @@ def export_logits(model, loader, path, device, labels):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dummy", action="store_true")
+    parser.add_argument("--demo-data", action="store_true", help="Mark a physical synthetic dataset as demonstration only")
+    parser.add_argument("--threads", type=int, default=2)
     parser.add_argument("--backbone", choices=["tiny", "resnet18", "efficientnet_b0", "convnext_tiny"], default="tiny")
     parser.add_argument("--pretrained", action="store_true", help="Downloads pretrained weights when needed")
     parser.add_argument("--manifest")
@@ -175,6 +177,9 @@ def main():
     if args.epochs < 1 or args.batch_size < 1:
         parser.error("epochs and batch-size must be positive")
     seed_everything(args.seed)
+    if args.threads < 1:
+        parser.error("threads must be positive")
+    torch.set_num_threads(args.threads)
     if args.dummy:
         labels = {"species": [f"species_{i}" for i in range(156)], **{k: ["dummy_0", "dummy_1", "dummy_2"] for k in FEATURES}}
         datasets = {split: DummyDataset(8, labels, args.seed + i, split) for i, split in enumerate(("train", "calib", "val", "test"))}
@@ -206,7 +211,7 @@ def main():
     amp = args.amp and device.type == "cuda"
     scaler = torch.amp.GradScaler("cuda", enabled=amp)
     history, best = [], float("inf")
-    print(f"Device: {device}; synthetic data: {args.dummy}")
+    print(f"Device: {device}; synthetic data: {args.dummy or args.demo_data}")
     for epoch in range(args.epochs):
         model.train()
         for images, targets, _ in loaders["train"]:

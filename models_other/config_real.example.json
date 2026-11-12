@@ -1,0 +1,17 @@
+{
+  "mode": "real",
+  "manifest": "data/orchid/split_manifest.csv",
+  "label_maps": "data/orchid/label_maps.json",
+  "normalization": "data/orchid/normalization.json",
+  "data_root": "data/orchid",
+  "output": "outputs/real_grid_v1",
+  "backbones": ["efficientnet_b0", "convnext_tiny"],
+  "learning_rates": [0.001, 0.0003, 0.0001],
+  "epochs": 10,
+  "batch_size": 16,
+  "threads": 2,
+  "loss": "ce",
+  "sampler": "plain",
+  "pretrained": true,
+  "amp": true
+}
