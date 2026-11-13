@@ -1,0 +1,5 @@
+split,images,species,duplicate_groups
+calib,509,133,482
+test,795,135,753
+train,4579,156,4341
+val,1273,152,1206

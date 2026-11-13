@@ -1,0 +1,201 @@
+{
+  "image_count": 7156,
+  "splits": {
+    "train": {
+      "rows": 5119,
+      "unique_images": 5119,
+      "species_count": 156,
+      "missing_values": {
+        "Image_Number": 0,
+        "T": 0,
+        "LC": 0,
+        "In": 0,
+        "NF": 0,
+        "CL": 0,
+        "CF": 0,
+        "Species": 0,
+        "split": 0
+      },
+      "columns": [
+        "Image_Number",
+        "T",
+        "LC",
+        "In",
+        "NF",
+        "CL",
+        "CF",
+        "Species",
+        "split"
+      ]
+    },
+    "val": {
+      "rows": 1235,
+      "unique_images": 1235,
+      "species_count": 156,
+      "missing_values": {
+        "Image_Number": 0,
+        "T": 0,
+        "LC": 0,
+        "In": 0,
+        "NF": 0,
+        "CL": 0,
+        "CF": 0,
+        "Species": 0,
+        "split": 0
+      },
+      "columns": [
+        "Image_Number",
+        "T",
+        "LC",
+        "In",
+        "NF",
+        "CL",
+        "CF",
+        "Species",
+        "split"
+      ]
+    },
+    "test": {
+      "rows": 802,
+      "unique_images": 802,
+      "species_count": 156,
+      "missing_values": {
+        "Image_Number": 0,
+        "T": 0,
+        "LC": 0,
+        "In": 0,
+        "NF": 0,
+        "CL": 0,
+        "CF": 0,
+        "Species": 0,
+        "split": 0
+      },
+      "columns": [
+        "Image_Number",
+        "T",
+        "LC",
+        "In",
+        "NF",
+        "CL",
+        "CF",
+        "Species",
+        "split"
+      ]
+    }
+  },
+  "image_extension_counts": {
+    ".jpg": 7118,
+    ".jfif": 4,
+    ".jpeg": 34
+  },
+  "total_csv_rows": 7156,
+  "unique_csv_images": 7156,
+  "species_count_overall": 156,
+  "feature_classes": {
+    "T": [
+      "Nospot",
+      "Spot"
+    ],
+    "LC": [
+      "Fringed",
+      "Lobed",
+      "Pouched",
+      "Simple"
+    ],
+    "In": [
+      "Panicle",
+      "Raceme",
+      "SingleOrPair",
+      "Spike"
+    ],
+    "NF": [
+      "AFew",
+      "Many",
+      "SinglePair"
+    ],
+    "CL": [
+      "BluePurple",
+      "Green",
+      "Orange",
+      "PinkRed",
+      "PinkRedWhite",
+      "PurpleYellow",
+      "White",
+      "WhiteYellow",
+      "Yellow",
+      "YellowBrown"
+    ],
+    "CF": [
+      "Brown",
+      "Green",
+      "GreenBrown",
+      "GreenWhite",
+      "GreenYellow",
+      "Orange",
+      "Pink",
+      "PinkWhite",
+      "Purple",
+      "PurpleWhite",
+      "Red",
+      "White",
+      "Yellow",
+      "YellowBrown",
+      "YellowPurple"
+    ]
+  },
+  "feature_value_counts": {
+    "T": {
+      "Nospot": 5673,
+      "Spot": 1483
+    },
+    "LC": {
+      "Lobed": 2892,
+      "Simple": 1970,
+      "Pouched": 1666,
+      "Fringed": 628
+    },
+    "In": {
+      "Raceme": 3954,
+      "SingleOrPair": 1607,
+      "Spike": 1429,
+      "Panicle": 166
+    },
+    "NF": {
+      "Many": 3320,
+      "AFew": 2235,
+      "SinglePair": 1601
+    },
+    "CL": {
+      "White": 2486,
+      "PinkRed": 1374,
+      "Green": 987,
+      "BluePurple": 692,
+      "Yellow": 616,
+      "PinkRedWhite": 504,
+      "Orange": 222,
+      "YellowBrown": 131,
+      "PurpleYellow": 119,
+      "WhiteYellow": 25
+    },
+    "CF": {
+      "GreenBrown": 1670,
+      "White": 1445,
+      "Green": 1237,
+      "Pink": 857,
+      "YellowBrown": 454,
+      "Purple": 453,
+      "Orange": 222,
+      "GreenYellow": 207,
+      "Red": 196,
+      "YellowPurple": 167,
+      "Yellow": 119,
+      "GreenWhite": 48,
+      "PurpleWhite": 34,
+      "PinkWhite": 32,
+      "Brown": 15
+    }
+  },
+  "csv_images_missing_on_disk": [],
+  "images_not_in_multilabel_csv": 0,
+  "unreadable_images": []
+}
