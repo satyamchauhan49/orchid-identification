@@ -1,8 +1,41 @@
+
+# Dataset files
 data/raw/
-outputs/*.npz
-outputs/**/*.npz
+data/
+dataset/
+datasets/
+*.jpg
+*.jpeg
+*.png
+*.jfif
+*.zip
+
+# Model checkpoints
 *.pt
 *.pth
+*.ckpt
+
+# Model prediction outputs
+outputs/*.npz
+outputs/**/*.npz
+
+# Python cache
 __pycache__/
-.venv/
+*.py[cod]
 .ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# IDE and system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
