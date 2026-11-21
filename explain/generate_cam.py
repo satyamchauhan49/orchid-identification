@@ -32,8 +32,9 @@ def select_layer(model, backbone):
 def generate(checkpoint_path, output_dir, image_path=None, demo=False, device="cpu", alpha=0.45):
     if not 0 <= alpha <= 1:
         raise ValueError("alpha must be between zero and one")
-    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
-    config = checkpoint["args"]
+    from explain.checkpoints import load_checkpoint
+    from models_other.preprocessing import geometry
+    model, labels, config, backbone, layer_name, layer = load_checkpoint(checkpoint_path)
     dummy = config.get("dummy") is True
     demonstration = dummy or config.get("demo_data") is True
     if demo and not dummy:
@@ -45,10 +46,7 @@ def generate(checkpoint_path, output_dir, image_path=None, demo=False, device="c
     output_dir = Path(output_dir)
     if output_dir.exists() and any(output_dir.iterdir()):
         raise ValueError("Output folder is not empty; choose another name to preserve existing explanations")
-    model = MultiTaskModel(checkpoint["backbone"], checkpoint["labels"], pretrained=False)
-    model.load_state_dict(checkpoint["model"])
     model.to(device).eval()
-    layer_name, layer = select_layer(model, checkpoint["backbone"])
     if demo:
         # Synthetic plumbing check, not a flower photo or scientific result.
         rgb = np.random.default_rng(42).integers(0, 256, (224, 224, 3), dtype=np.uint8)
@@ -56,8 +54,8 @@ def generate(checkpoint_path, output_dir, image_path=None, demo=False, device="c
     else:
         with Image.open(image_path) as opened:
             source = ImageOps.exif_transpose(opened).convert("RGB")
-    resized = source.resize((224, 224), Image.Resampling.BILINEAR)
-    preprocessing = [transforms.Resize((224, 224)), transforms.ToTensor()]
+    resized = transforms.Compose(geometry(config["preprocessing"]))(source)
+    preprocessing = [*geometry(config["preprocessing"]), transforms.ToTensor()]
     if not dummy:
         preprocessing.append(transforms.Normalize(config["mean"], config["std"]))
     tensor = transforms.Compose(preprocessing)(source).unsqueeze(0).to(device)
@@ -65,7 +63,7 @@ def generate(checkpoint_path, output_dir, image_path=None, demo=False, device="c
         predictions, _ = model(tensor)
     output_dir.mkdir(parents=True, exist_ok=True)
     resized.save(output_dir / "input.png")
-    metadata = {"checkpoint": str(Path(checkpoint_path).resolve()), "backbone": checkpoint["backbone"],
+    metadata = {"checkpoint": str(Path(checkpoint_path).resolve()), "backbone": backbone, "preprocessing": config["preprocessing"],
                 "target_layer": layer_name, "image": str(Path(image_path).resolve()) if image_path else "synthetic noise",
                 "synthetic_checkpoint": demonstration, "demo_image": demo,
                 "note": "Synthetic checkpoint: visual plumbing only, not a meaningful orchid explanation." if demonstration else
@@ -84,7 +82,7 @@ def generate(checkpoint_path, output_dir, image_path=None, demo=False, device="c
         overlay = np.clip((1 - weight) * base + weight * colored, 0, 1)
         Image.fromarray((heatmap * 255).round().astype(np.uint8)).save(output_dir / f"{head}_heatmap.png")
         Image.fromarray((overlay * 255).round().astype(np.uint8)).save(output_dir / f"{head}_overlay.png")
-        metadata["heads"][head] = {"class_index": index, "label": checkpoint["labels"][head][index],
+        metadata["heads"][head] = {"class_index": index, "label": labels[head][index],
                                     "uncalibrated_confidence": float(probability[index].item()),
                                     "all_zero_heatmap": bool(heatmap.max() == 0),
                                     "heatmap": f"{head}_heatmap.png", "overlay": f"{head}_overlay.png"}

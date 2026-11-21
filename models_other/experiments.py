@@ -29,6 +29,9 @@ def run(config_path):
                        "--std", *map(str, normalization["std"]), "--epochs", str(config["epochs"]),
                        "--batch-size", str(config.get("batch_size", 4)), "--lr", str(lr),
                        "--loss", config.get("loss", "ce"), "--sampler", config.get("sampler", "plain"),
+                       "--weight-decay", str(config.get("weight_decay", 1e-4)),
+                       "--patience", str(config.get("patience", 4)),
+                       "--preprocessing", config.get("preprocessing", "agrim_v1"),
                        "--threads", str(config.get("threads", 2)), "--output", str(output)]
             for flag in ("pretrained", "amp"):
                 if config.get(flag): command.append("--" + flag)

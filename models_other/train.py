@@ -31,7 +31,7 @@ def load_labels(path):
 
 
 class OrchidDataset(Dataset):
-    def __init__(self, manifest, root, split, labels, mean, std, training=False):
+    def __init__(self, manifest, root, split, labels, mean, std, training=False, preprocessing="agrim_v1"):
         import pandas as pd
         frame = pd.read_csv(manifest, dtype=str).fillna("")
         required = {"image_id", "path", "species", "split", *FEATURES}
@@ -44,11 +44,8 @@ class OrchidDataset(Dataset):
             raise ValueError(f"No rows for split {split}")
         self.root = Path(root)
         self.maps = {key: {name: i for i, name in enumerate(values)} for key, values in labels.items()}
-        self.transform = transforms.Compose([
-            transforms.Resize((224, 224)),
-            *([transforms.RandomHorizontalFlip()] if training else []),
-            transforms.ToTensor(), transforms.Normalize(mean, std),
-        ])
+        from models_other.preprocessing import image_transform
+        self.transform = image_transform(mean, std, preprocessing, training)
         self.species_targets = [self.encode("species", r["species"]) for r in self.rows]
 
     def encode(self, key, value):
@@ -153,6 +150,7 @@ def main():
     parser.add_argument("--demo-data", action="store_true", help="Mark a physical synthetic dataset as demonstration only")
     parser.add_argument("--threads", type=int, default=2)
     parser.add_argument("--backbone", choices=["tiny", "resnet18", "efficientnet_b0", "convnext_tiny"], default="tiny")
+    parser.add_argument("--preprocessing", choices=["agrim_v1", "legacy_square"], default="agrim_v1")
     parser.add_argument("--pretrained", action="store_true", help="Downloads pretrained weights when needed")
     parser.add_argument("--manifest")
     parser.add_argument("--label-maps")
@@ -161,6 +159,8 @@ def main():
     parser.add_argument("--std", nargs=3, type=float)
     parser.add_argument("--epochs", type=int, default=1)
     parser.add_argument("--batch-size", type=int, default=4)
+    parser.add_argument("--weight-decay", type=float, default=1e-4)
+    parser.add_argument("--patience", type=int, default=4, help="Validation epochs without improvement; zero disables early stopping")
     parser.add_argument("--lr", type=float, default=3e-4)
     parser.add_argument("--loss", choices=["ce", "smooth", "focal"], default="ce")
     parser.add_argument("--gamma", type=float, default=2.0)
@@ -171,6 +171,8 @@ def main():
     args = parser.parse_args()
     if args.epochs < 1 or args.batch_size < 1:
         parser.error("epochs and batch-size must be positive")
+    if args.weight_decay < 0 or args.patience < 0:
+        parser.error("weight-decay and patience must be nonnegative")
     seed_everything(args.seed)
     if args.threads < 1:
         parser.error("threads must be positive")
@@ -186,7 +188,7 @@ def main():
         if any(x <= 0 for x in args.std):
             parser.error("std must be positive")
         labels = load_labels(args.label_maps)
-        datasets = {s: OrchidDataset(args.manifest, args.data_root, s, labels, args.mean, args.std, s == "train") for s in ("train", "calib", "val", "test")}
+        datasets = {s: OrchidDataset(args.manifest, args.data_root, s, labels, args.mean, args.std, s == "train", args.preprocessing) for s in ("train", "calib", "val", "test")}
     output = Path(args.output)
     if output.exists() and any(output.iterdir()):
         parser.error("Output directory is not empty. Choose a new run name to preserve prior results.")
@@ -202,10 +204,10 @@ def main():
                               sampler=sampler if s == "train" else None, num_workers=0) for s, d in datasets.items()}
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = MultiTaskModel(args.backbone, labels, args.pretrained).to(device)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     amp = args.amp and device.type == "cuda"
     scaler = torch.amp.GradScaler("cuda", enabled=amp)
-    history, best = [], float("inf")
+    history, best, bad_epochs = [], float("inf"), 0
     print(f"Device: {device}; synthetic data: {args.dummy or args.demo_data}")
     for epoch in range(args.epochs):
         model.train()
@@ -228,8 +230,14 @@ def main():
         torch.save(checkpoint, output / "last.pt")
         if val_loss < best:
             best = val_loss
+            bad_epochs = 0
             torch.save(checkpoint, output / "best.pt")
+        else:
+            bad_epochs += 1
         print(f"Epoch {epoch + 1}: validation loss {val_loss:.4f}")
+        if args.patience and bad_epochs >= args.patience:
+            print("Early stopping triggered")
+            break
     model.load_state_dict(torch.load(output / "best.pt", map_location=device, weights_only=True)["model"])
     map_hash = hashlib.sha256(Path(args.label_maps).read_bytes()).hexdigest() if args.label_maps else hashlib.sha256(json.dumps(labels, sort_keys=True).encode()).hexdigest()
     provenance = {"label_maps_sha256": map_hash,
