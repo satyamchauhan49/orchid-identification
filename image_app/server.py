@@ -91,6 +91,28 @@ def handler(predictor):
                     self.reply(200, photo.read_bytes(), 'image/png')
                 else:
                     self.reply(404, dict(error='Not found'))
+            elif self.path.startswith('/assets/'):
+                name = self.path.removeprefix('/assets/')
+                allowed = {'pink-orchid.jpg', 'golden-orchid.jpg', 'violet-orchid.jpg', 'white-orchid.jpg', 'orchid.css', 'orchid.js'}
+                photo = Path(__file__).with_name('assets') / name
+                if name in allowed and photo.is_file():
+                    self.reply(200, photo.read_bytes(), {'.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8'}.get(photo.suffix, 'image/jpeg'))
+                else:
+                    self.reply(404, dict(error='Not found'))
+            elif self.path == '/results':
+                self.send_response(302); self.send_header('Location', '/results/'); self.end_headers()
+            elif self.path.startswith('/results/'):
+                from urllib.parse import unquote, urlsplit
+                root = Path(__file__).resolve().parents[1] / 'site/final_results'
+                relative = unquote(urlsplit(self.path).path).removeprefix('/results/') or 'index.html'
+                resource = (root / relative).resolve()
+                types = {'.html': 'text/html; charset=utf-8', '.png': 'image/png',
+                         '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.json': 'application/json',
+                         '.csv': 'text/csv; charset=utf-8', '.md': 'text/plain; charset=utf-8'}
+                if resource.is_relative_to(root.resolve()) and resource.is_file() and resource.suffix in types:
+                    self.reply(200, resource.read_bytes(), types[resource.suffix])
+                else:
+                    self.reply(404, dict(error='Not found'))
             elif self.path=='/api/status':self.reply(200,dict(demo=predictor.demo))
             else:self.reply(404,dict(error='Not found'))
         def do_POST(self):
