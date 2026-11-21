@@ -1,11 +1,39 @@
-.venv/
-.idea/
-__pycache__/
-*.py[cod]
-data/
-datasets/
-work/
-outputs/
+# Local datasets and generated model artifacts
+/data/
+/dataset/
+/datasets/
+/work/
+/outputs/
+/.drive-backup/
 *.pt
 *.pth
+*.ckpt
 *.npz
+*.zip
+*.jpg
+*.jpeg
+*.png
+*.jfif
+
+# Keep intentional report and website assets reviewable.
+!report/**/*.png
+!report/**/*.jpg
+!report/**/*.jpeg
+!site/**/*.png
+!site/**/*.jpg
+!site/**/*.jpeg
+!/outputs/eda/*_distribution.png
+
+# Python, environments and local configuration
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+.env
+.env.*
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

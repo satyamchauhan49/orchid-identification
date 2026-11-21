@@ -1,0 +1,11 @@
+actual,BluePurple,Green,Orange,PinkRed,PinkRedWhite,PurpleYellow,White,WhiteYellow,Yellow,YellowBrown
+BluePurple,87,6,0,11,0,0,16,0,0,2
+Green,0,119,0,0,2,0,51,0,2,1
+Orange,0,0,31,0,0,0,5,0,3,0
+PinkRed,3,0,0,216,0,0,26,0,0,1
+PinkRedWhite,0,0,0,7,74,0,10,0,1,0
+PurpleYellow,0,0,0,0,0,20,1,0,0,0
+White,0,8,0,12,2,0,419,0,1,0
+WhiteYellow,0,0,0,0,0,1,1,1,0,1
+Yellow,0,7,1,1,1,0,20,0,78,1
+YellowBrown,0,1,0,1,0,0,2,0,1,18
