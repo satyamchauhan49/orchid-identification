@@ -1,0 +1,48 @@
+{
+  "checkpoint": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/convnext_tiny_lr0.0001/best.pt",
+  "backbone": "convnext_tiny",
+  "preprocessing": "agrim_v1",
+  "target_layer": "backbone.stages.3.blocks.2.conv_dw",
+  "image": "/content/orchid_data/Orchid Flowers Dataset-v1.1/Orchid_Images/5.jpg",
+  "synthetic_checkpoint": false,
+  "demo_image": false,
+  "note": "Softmax confidence is uncalibrated. Heatmaps highlight model sensitivity, not proof of botanical correctness.",
+  "normalization": {
+    "mean": [
+      0.40453335642814636,
+      0.4082944095134735,
+      0.2660682499408722
+    ],
+    "std": [
+      0.2277458906173706,
+      0.21494299173355103,
+      0.22625732421875
+    ]
+  },
+  "heads": {
+    "species": {
+      "class_index": 0,
+      "label": "1",
+      "uncalibrated_confidence": 0.7475570440292358,
+      "all_zero_heatmap": false,
+      "heatmap": "species_heatmap.png",
+      "overlay": "species_overlay.png"
+    },
+    "CF": {
+      "class_index": 11,
+      "label": "White",
+      "uncalibrated_confidence": 0.9690796136856079,
+      "all_zero_heatmap": false,
+      "heatmap": "CF_heatmap.png",
+      "overlay": "CF_overlay.png"
+    },
+    "CL": {
+      "class_index": 4,
+      "label": "PinkRedWhite",
+      "uncalibrated_confidence": 0.7644119262695312,
+      "all_zero_heatmap": false,
+      "heatmap": "CL_heatmap.png",
+      "overlay": "CL_overlay.png"
+    }
+  }
+}

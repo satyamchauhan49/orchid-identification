@@ -25,7 +25,7 @@ def build(comparison_path, records_path, output):
     payload = {"mode": mode, "comparison": comparison, "records": records["records"], "provenance": records.get("provenance", {})}
     serialized = json.dumps(payload, ensure_ascii=True).replace("<", "\\u003c")
     template = Path("site/template.html").read_text(encoding="utf-8")
-    figure_links = '<p><a href="figures/comparison.png">Comparison figure</a> · <a href="figures/learning_curves.png">Learning curves</a> · <a href="figures/confusion_CF.png">CF confusion matrix</a> · <a href="figures/confusion_CL.png">CL confusion matrix</a></p>'
+    figure_links = '<p><a href="figures/comparison.png">Comparison figure</a> Â· <a href="figures/learning_curves.png">Learning curves</a> Â· <a href="figures/confusion_CF.png">CF confusion matrix</a> Â· <a href="figures/confusion_CL.png">CL confusion matrix</a></p>'
     (output / "index.html").write_text(template.replace("__PAYLOAD__", serialized).replace("Agr im", "Agrim").replace('<div class="pending">', figure_links+'<div class="pending">'), encoding="utf-8")
     selected = comparison_path.parent / comparison["selected_run"]
     config = json.loads((selected / "run_config.json").read_text())
@@ -58,6 +58,21 @@ def build(comparison_path, records_path, output):
     if records.get("provenance", {}).get("resolver") == "c-resolver":
         report_text = report_text.replace("Demo resolver cases are simulated independently of model predictions.",
             "Resolver cases come from the actual frozen C pipeline on B's synthetic image-model outputs. All decisions retain map, model, artifact and bundle provenance. Only observed stages are shown.")
+    if mode == "real":
+        start = report_text.index("## Limitations and remaining team work")
+        end = report_text.index("## Input provenance", start)
+        report_text = report_text[:start] + (
+            "## Limitations and remaining team work\n"
+            "These are real validation experiments and real resolver decisions; they are not final test results. "
+            "Only decision stages actually produced by the frozen validation policy are represented. "
+            "The absence of auto-resolved examples must not be hidden or filled with simulated cases.\n\n"
+            "Grad-CAM is qualitative: flower overlap varies and consistent labellum localization has not been established. "
+            "Empirical TRAIN-derived feature distributions are not expert botanical annotations. "
+            "Missing reference images remain explicit.\n\n"
+            "Final team model selection, review of R2/R4 and calibration plots, the locked test evaluation, "
+            "final test explanation records and website publication remain separate steps. "
+            "Calibration-selected risk is not a guarantee of validation or test performance.\n\n"
+        ) + report_text[end:]
     (output / "report.md").write_text(report_text, encoding="utf-8")
     # Only calib/val are opened here. Test files are inventoried without reading scores.
     inventory = []
