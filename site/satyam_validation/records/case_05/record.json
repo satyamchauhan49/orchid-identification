@@ -347,7 +347,7 @@
     "fused_confidence": 0.1964318385207029,
     "final_species": null,
     "reason": "Frozen C resolver stage low_confidence; weight=1.0; threshold=0.7338323883066077.",
-    "source": "supplied by Satyam's resolver"
+    "source": "supplied by the calibrated resolver"
   },
   "directory": "case_05"
 }

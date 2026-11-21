@@ -1,11 +1,11 @@
-# Sneha Malik: model comparison and explainability
+# Project Report: Model Comparison and Explainability
 
 Validation results. Locked-test analysis remains a separate team stage.
 
 ## Models and protocol
 EfficientNet-B0 and ConvNeXt-T share a 156-way species head and six feature heads (T, NF, In, LC, CF, CL). Missing labels are masked. Raw logits preserve the calibration interface.
 Seed: 42. Resolution: 224 x 224. Optimizer: AdamW. Epochs: 15. Batch size: 32. Loss: ce. Sampler: plain. Pretrained: True.
-Validation loss selects each run's checkpoint. The grid selects by mean feature macro-F1, breaking ties using validation loss. Final backbone selection still requires calibration and Agrim's ResNet comparison.
+Validation loss selects each run's checkpoint. The grid selects by mean feature macro-F1, breaking ties using validation loss. Final backbone selection still requires calibration and the ResNet comparison.
 
 ## Validation comparison
 | Backbone | LR | Species macro-F1 | Feature macro-F1 | Top-1 | Val loss |
@@ -271,7 +271,7 @@ Taxonomic records compare observed features to expected feature distributions. C
 | 1398.jpg | auto_resolved | 25 | 145 |
 
 ## Limitations and remaining team work
-Real validation under Satyam's disjoint-calibration policy: DNN/fusion accuracy 79.42%, accepted accuracy 94.46%, deferral 30.48%. Weight 1.0 means fusion equals DNN; no BN gain is demonstrated. There are 877 trusted, 8 auto_resolved and 388 deferred decisions overall. Accepted error exceeds the 1.5% target. Stage names alone do not prove BN corrections.
+Real validation under the disjoint-calibration policy: DNN/fusion accuracy 79.42%, accepted accuracy 94.46%, deferral 30.48%. Weight 1.0 means fusion equals DNN; no BN gain is demonstrated. There are 877 trusted, 8 auto_resolved and 388 deferred decisions overall. Accepted error exceeds the 1.5% target. Stage names alone do not prove BN corrections.
 
 Ten actual validation cases are illustrated with matching model Grad-CAM. Consistent labellum localization is not established. Taxonomy is empirical TRAIN evidence. These are not final test results. Team freeze, locked evaluation and publication remain pending. Earlier 79.58%/96.86%/39.98% figures belong to a separate policy experiment.
 

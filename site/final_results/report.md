@@ -1,6 +1,6 @@
-# Sneha Malik: model comparison and explainability
+# Project Report: Model Comparison and Explainability
 
-Final locked evaluation supplied by Satyam; backbone search remains validation-only.
+Final locked evaluation supplied by the project evaluation pipeline; backbone search remains validation-only.
 
 ## Models and protocol
 EfficientNet-B0 and ConvNeXt-T share a 156-way species head and six feature heads (T, NF, In, LC, CF, CL). Missing labels are masked. Raw logits preserve the calibration interface.

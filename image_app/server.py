@@ -93,10 +93,11 @@ def handler(predictor):
                     self.reply(404, dict(error='Not found'))
             elif self.path.startswith('/assets/'):
                 name = self.path.removeprefix('/assets/')
-                allowed = {'pink-orchid.jpg', 'golden-orchid.jpg', 'violet-orchid.jpg', 'white-orchid.jpg', 'orchid.css', 'orchid.js'}
+                allowed = {'pink-orchid.jpg', 'golden-orchid.jpg', 'violet-orchid.jpg', 'white-orchid.jpg', 'orchid.css', 'orchid.js', 'gallery.json'}
+                allowed.update(p.name for p in Path(__file__).with_name('assets').glob('dataset-*.jpg'))
                 photo = Path(__file__).with_name('assets') / name
                 if name in allowed and photo.is_file():
-                    self.reply(200, photo.read_bytes(), {'.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8'}.get(photo.suffix, 'image/jpeg'))
+                    self.reply(200, photo.read_bytes(), {'.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8'}.get(photo.suffix, 'image/jpeg'))
                 else:
                     self.reply(404, dict(error='Not found'))
             elif self.path == '/results':
@@ -106,7 +107,7 @@ def handler(predictor):
                 root = Path(__file__).resolve().parents[1] / 'site/final_results'
                 relative = unquote(urlsplit(self.path).path).removeprefix('/results/') or 'index.html'
                 resource = (root / relative).resolve()
-                types = {'.html': 'text/html; charset=utf-8', '.png': 'image/png',
+                types = {'.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.png': 'image/png',
                          '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.json': 'application/json',
                          '.csv': 'text/csv; charset=utf-8', '.md': 'text/plain; charset=utf-8'}
                 if resource.is_relative_to(root.resolve()) and resource.is_file() and resource.suffix in types:

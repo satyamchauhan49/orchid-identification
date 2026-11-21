@@ -357,7 +357,7 @@
         "fused_confidence": 0.8680925274575076,
         "final_species": null,
         "reason": "Frozen C resolver stage low_confidence; weight=0.9; threshold=0.8715120259153742.",
-        "source": "supplied by Satyam's resolver"
+        "source": "supplied by the calibrated resolver"
       },
       "directory": "case_00"
     },
@@ -710,7 +710,7 @@
         "fused_confidence": 0.476244752928882,
         "final_species": null,
         "reason": "Frozen C resolver stage low_confidence; weight=0.9; threshold=0.8715120259153742.",
-        "source": "supplied by Satyam's resolver"
+        "source": "supplied by the calibrated resolver"
       },
       "directory": "case_01"
     },
@@ -1063,7 +1063,7 @@
         "fused_confidence": 0.5580658432905566,
         "final_species": null,
         "reason": "Frozen C resolver stage low_confidence; weight=0.9; threshold=0.8715120259153742.",
-        "source": "supplied by Satyam's resolver"
+        "source": "supplied by the calibrated resolver"
       },
       "directory": "case_02"
     },
@@ -1416,7 +1416,7 @@
         "fused_confidence": 0.89507351884183,
         "final_species": "1",
         "reason": "Frozen C resolver stage trusted_agreement; weight=0.9; threshold=0.8715120259153742.",
-        "source": "supplied by Satyam's resolver"
+        "source": "supplied by the calibrated resolver"
       },
       "directory": "case_03"
     },
@@ -1769,7 +1769,7 @@
         "fused_confidence": 0.6717348590994388,
         "final_species": null,
         "reason": "Frozen C resolver stage low_confidence; weight=0.9; threshold=0.8715120259153742.",
-        "source": "supplied by Satyam's resolver"
+        "source": "supplied by the calibrated resolver"
       },
       "directory": "case_04"
     },
@@ -2122,7 +2122,7 @@
         "fused_confidence": 0.22079938766828686,
         "final_species": null,
         "reason": "Frozen C resolver stage low_confidence; weight=0.9; threshold=0.8715120259153742.",
-        "source": "supplied by Satyam's resolver"
+        "source": "supplied by the calibrated resolver"
       },
       "directory": "case_05"
     },
@@ -2475,7 +2475,7 @@
         "fused_confidence": 0.5422922971070295,
         "final_species": null,
         "reason": "Frozen C resolver stage low_confidence; weight=0.9; threshold=0.8715120259153742.",
-        "source": "supplied by Satyam's resolver"
+        "source": "supplied by the calibrated resolver"
       },
       "directory": "case_06"
     },
@@ -2828,7 +2828,7 @@
         "fused_confidence": 0.45154418133906654,
         "final_species": null,
         "reason": "Frozen C resolver stage low_confidence; weight=0.9; threshold=0.8715120259153742.",
-        "source": "supplied by Satyam's resolver"
+        "source": "supplied by the calibrated resolver"
       },
       "directory": "case_07"
     },
@@ -3181,7 +3181,7 @@
         "fused_confidence": 0.9896380328716713,
         "final_species": "3",
         "reason": "Frozen C resolver stage trusted_agreement; weight=0.9; threshold=0.8715120259153742.",
-        "source": "supplied by Satyam's resolver"
+        "source": "supplied by the calibrated resolver"
       },
       "directory": "case_08"
     },
@@ -3534,7 +3534,7 @@
         "fused_confidence": 0.9339367498682937,
         "final_species": "3",
         "reason": "Frozen C resolver stage trusted_agreement; weight=0.9; threshold=0.8715120259153742.",
-        "source": "supplied by Satyam's resolver"
+        "source": "supplied by the calibrated resolver"
       },
       "directory": "case_09"
     }

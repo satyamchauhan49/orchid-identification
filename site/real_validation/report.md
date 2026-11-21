@@ -1,11 +1,11 @@
-# Sneha Malik: model comparison and explainability
+# Project Report: Model Comparison and Explainability
 
 Validation results. Locked-test analysis remains a separate team stage.
 
 ## Models and protocol
 EfficientNet-B0 and ConvNeXt-T share a 156-way species head and six feature heads (T, NF, In, LC, CF, CL). Missing labels are masked. Raw logits preserve the calibration interface.
 Seed: 42. Resolution: 224 x 224. Optimizer: AdamW. Epochs: 15. Batch size: 32. Loss: ce. Sampler: plain. Pretrained: True.
-Validation loss selects each run's checkpoint. The grid selects by mean feature macro-F1, breaking ties using validation loss. Final backbone selection still requires calibration and Agrim's ResNet comparison.
+Validation loss selects each run's checkpoint. The grid selects by mean feature macro-F1, breaking ties using validation loss. Final backbone selection still requires calibration and the ResNet comparison.
 
 ## Validation comparison
 | Backbone | LR | Species macro-F1 | Feature macro-F1 | Top-1 | Val loss |

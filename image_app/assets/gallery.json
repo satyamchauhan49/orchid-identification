@@ -1,0 +1,122 @@
+[
+  {
+    "key": "dataset_3",
+    "name": "Arethusa bulbosa",
+    "image": "/assets/dataset-3.jpg",
+    "caption": "Dataset training example \u00b7 100.jpg \u00b7 species 3",
+    "dataset": true,
+    "image_id": "100.jpg",
+    "species_id": "3",
+    "split": "train"
+  },
+  {
+    "key": "dataset_6",
+    "name": "Brassia caudata",
+    "image": "/assets/dataset-6.jpg",
+    "caption": "Dataset training example \u00b7 166.jpg \u00b7 species 6",
+    "dataset": true,
+    "image_id": "166.jpg",
+    "species_id": "6",
+    "split": "train"
+  },
+  {
+    "key": "dataset_11",
+    "name": "Calopogon tuberosus",
+    "image": "/assets/dataset-11.jpg",
+    "caption": "Dataset training example \u00b7 247.jpg \u00b7 species 11",
+    "dataset": true,
+    "image_id": "247.jpg",
+    "species_id": "11",
+    "split": "train"
+  },
+  {
+    "key": "dataset_12",
+    "name": "Calypso bulbosa",
+    "image": "/assets/dataset-12.jpg",
+    "caption": "Dataset training example \u00b7 483.jpg \u00b7 species 12",
+    "dataset": true,
+    "image_id": "483.jpg",
+    "species_id": "12",
+    "split": "train"
+  },
+  {
+    "key": "dataset_27",
+    "name": "Cypripedium acaule",
+    "image": "/assets/dataset-27.jpg",
+    "caption": "Dataset training example \u00b7 1433.jpg \u00b7 species 27",
+    "dataset": true,
+    "image_id": "1433.jpg",
+    "species_id": "27",
+    "split": "train"
+  },
+  {
+    "key": "dataset_35",
+    "name": "Cypripedium reginae",
+    "image": "/assets/dataset-35.jpg",
+    "caption": "Dataset training example \u00b7 2384.jpg \u00b7 species 35",
+    "dataset": true,
+    "image_id": "2384.jpg",
+    "species_id": "35",
+    "split": "train"
+  },
+  {
+    "key": "dataset_45",
+    "name": "Encyclia tampensis",
+    "image": "/assets/dataset-45.jpg",
+    "caption": "Dataset training example \u00b7 2607.jpg \u00b7 species 45",
+    "dataset": true,
+    "image_id": "2607.jpg",
+    "species_id": "45",
+    "split": "train"
+  },
+  {
+    "key": "dataset_52",
+    "name": "Epipactis helleborine",
+    "image": "/assets/dataset-52.jpg",
+    "caption": "Dataset training example \u00b7 3004.jpg \u00b7 species 52",
+    "dataset": true,
+    "image_id": "3004.jpg",
+    "species_id": "52",
+    "split": "train"
+  },
+  {
+    "key": "dataset_59",
+    "name": "Galearis spectabilis",
+    "image": "/assets/dataset-59.jpg",
+    "caption": "Dataset training example \u00b7 3507.jpg \u00b7 species 59",
+    "dataset": true,
+    "image_id": "3507.jpg",
+    "species_id": "59",
+    "split": "train"
+  },
+  {
+    "key": "dataset_96",
+    "name": "Platanthera ciliaris",
+    "image": "/assets/dataset-96.jpg",
+    "caption": "Dataset training example \u00b7 4618.jpg \u00b7 species 96",
+    "dataset": true,
+    "image_id": "4618.jpg",
+    "species_id": "96",
+    "split": "train"
+  },
+  {
+    "key": "dataset_125",
+    "name": "Pogonia ophioglossoides",
+    "image": "/assets/dataset-125.jpg",
+    "caption": "Dataset training example \u00b7 5829.jpg \u00b7 species 125",
+    "dataset": true,
+    "image_id": "5829.jpg",
+    "species_id": "125",
+    "split": "train"
+  },
+  {
+    "key": "dataset_155",
+    "name": "Vanilla planifolia",
+    "image": "/assets/dataset-155.jpg",
+    "caption": "Dataset training example \u00b7 6969.jpg \u00b7 species 155",
+    "dataset": true,
+    "image_id": "6969.jpg",
+    "species_id": "155",
+    "split": "train"
+  }
+]
