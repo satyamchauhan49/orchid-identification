@@ -11,10 +11,13 @@ class AgrimAdapter(nn.Module):
         self.model = model
 
     def forward(self, images):
-        embedding = self.model.backbone(images).flatten(1)
-        outputs = {"species": self.model.species_head(embedding)}
-        outputs.update({k: head(embedding) for k, head in self.model.feature_heads.items()})
-        return outputs, embedding
+        features = []
+        handle = self.model.backbone.register_forward_hook(lambda module, args, value: features.append(value))
+        try:
+            outputs = self.model(images)
+            return outputs, features[0].flatten(1)
+        finally:
+            handle.remove()
 
 
 def validate_normalization(config):
@@ -37,12 +40,17 @@ def load_checkpoint(path):
         sizes = {k: len(labels[k]) for k in FEATURES}
         if checkpoint["num_species"] != 156 or checkpoint["feature_classes"] != sizes:
             raise ValueError("Checkpoint dimensions disagree with label maps")
-        model = OrchidMultiTaskResNet18(156, sizes, pretrained=False)
+        hsv = 'rgb_mean' in checkpoint['model_state_dict']
+        if hsv:
+            from models_resnet.model_hsv_colab import OrchidHSVResNet18
+            model = OrchidHSVResNet18(156, sizes, False, checkpoint['mean'], checkpoint['std'])
+        else:
+            model = OrchidMultiTaskResNet18(156, sizes, pretrained=False)
         model.load_state_dict(checkpoint["model_state_dict"], strict=True)
         wrapped = AgrimAdapter(model)
         config = {"mean": checkpoint["mean"], "std": checkpoint["std"], "preprocessing": "agrim_v1"}
         validate_normalization(config)
-        return wrapped, labels, config, "agrim_resnet18", "model.backbone.7.1.conv2", model.backbone[7][-1].conv2
+        return wrapped, labels, config, "agrim_hsv_resnet18" if hsv else "agrim_resnet18", "model.backbone.7.1.conv2", model.backbone[7][-1].conv2
     from explain.generate_cam import select_layer
     model = MultiTaskModel(checkpoint["backbone"], checkpoint["labels"], pretrained=False)
     model.load_state_dict(checkpoint["model"], strict=True)

@@ -1,0 +1,83 @@
+{
+  "model": "convnext_tiny_lr0.0001",
+  "model_selection": "Agreed by team via user",
+  "policy": "Existing prespecified development policy retained without retuning",
+  "final_test_status": "NOT_RUN_MISSING_CONVNEXT_TEST_EXPORT",
+  "weight": 1.0,
+  "threshold": 0.7338323883066077,
+  "validation_warning": "1.5% selective error target not achieved; 5.54% observed accepted validation error",
+  "bootstrap_group": "phash_cluster",
+  "test_expected_rows": 795,
+  "git_base": "77c1ff9b0c06de992bacb1b02c6992885cd40f7b",
+  "code_state": "Includes uncommitted files; content hashes are authoritative. Commit/review before final release.",
+  "files": {
+    "checkpoint": {
+      "path": "work/sneha-received/convnext_tiny_lr0.0001/best.pt",
+      "sha256": "8504b86ee117f0a6d6fe60f3bc0bd0abc4ee126ac39624c5e402336666d8243f"
+    },
+    "maps": {
+      "path": "work/sneha-analysis/convnext_tiny_lr0.0001/audited/label_maps.json",
+      "sha256": "c523cf61d55f30f452653056e95e0af92f8dbca9714749e0afae65dc633708cc"
+    },
+    "manifest": {
+      "path": "work/sneha-received/convnext_tiny_lr0.0001/split_manifest.csv",
+      "sha256": "bf8d843fc84203cd7aea74904aa153d7d5c71a0e1dd9d2861554c6e9d6e5a7a5"
+    },
+    "artifact": {
+      "path": "work/sneha-analysis/convnext_tiny_lr0.0001/experiments/frozen_direct_soft.json",
+      "sha256": "5920b5ac4dc3faed060b610b71cc78a5d0adea14f7cf3d0b171a8b29212d4852"
+    },
+    "calibration_bundle": {
+      "path": "work/sneha-analysis/convnext_tiny_lr0.0001/audited/calib.npz",
+      "sha256": "94b5907c73241e056e3752d22d81606eaec83d14978428a3bcaff1fa46408829"
+    },
+    "run_config": {
+      "path": "work/sneha-received/convnext_tiny_lr0.0001/run_config.json",
+      "sha256": "0616d2e73509cc677264ec4b0b115c6b039a61e747b2709ca0a0f2012a4a71c0"
+    },
+    "normalization": {
+      "path": "work/sneha-received/convnext_tiny_lr0.0001/normalization.json",
+      "sha256": "f80befd564d608073e700b0370264b191f361968685acaea8f42f78509740e0c"
+    },
+    "species_display_names": {
+      "path": "outputs/species_id_to_name.json",
+      "sha256": "66014548ada20ecb4554762bc5132c5ab5cbe6adeedcdc8d785ef090cfd5fa1b"
+    },
+    "code:bn_resolver/core.py": {
+      "path": "bn_resolver/core.py",
+      "sha256": "445c8863cd69b6a425f9f41ad6391b5ef194c9f02ad895705b6c9e55e5bb51cc"
+    },
+    "code:bn_resolver/pipeline.py": {
+      "path": "bn_resolver/pipeline.py",
+      "sha256": "a65e4153459d5d0b9f407487e46be6d159050ca589d898d90ec2239df9a9733c"
+    },
+    "code:bn_resolver/contracts.py": {
+      "path": "bn_resolver/contracts.py",
+      "sha256": "f9ea3d75df3b19e195751a6f8e61b1eaecb21589ba6ececac040864d0c0317cc"
+    },
+    "code:eval/metrics.py": {
+      "path": "eval/metrics.py",
+      "sha256": "471518dd68fcf460b5bd4de7544e3420082f57140f08210569789f61d29e5274"
+    },
+    "code:eval/final_convnext.py": {
+      "path": "eval/final_convnext.py",
+      "sha256": "c4dde71e5384b3adb5557c2ed10a5dc9154d8ea4f24cdaa8e67cf34f3a5ab27b"
+    },
+    "code:explain/checkpoints.py": {
+      "path": "explain/checkpoints.py",
+      "sha256": "0d89a9e5779676110ed9718787142a811e56bd4f5c0d7c958555d172299dba56"
+    },
+    "code:models_other/preprocessing.py": {
+      "path": "models_other/preprocessing.py",
+      "sha256": "4d2320985efae69d0f832f235fcdabc39a50974deaf92a5d2f7b0e0437038820"
+    },
+    "code:models_other/train.py": {
+      "path": "models_other/train.py",
+      "sha256": "b1aeecdbb91afe7f827452e303557ee7a040681a2b3c25316d9f2954974546fd"
+    },
+    "code:image_app/server.py": {
+      "path": "image_app/server.py",
+      "sha256": "958e335672e7e738f75ed9027405ee858e49aa449c598a09a6cb31d769dd469c"
+    }
+  }
+}

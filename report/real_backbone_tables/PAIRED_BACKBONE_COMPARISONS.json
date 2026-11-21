@@ -1,0 +1,137 @@
+{
+  "convnext_tiny_lr0.0001 minus ResNet E1": {
+    "grouped_ci": {
+      "method": "paired whole-cluster percentile bootstrap; image-weighted ratios",
+      "group_count": 1206,
+      "image_count": 1273,
+      "resamples": 1000,
+      "seed": 42,
+      "estimable": true,
+      "intervals": {
+        "baseline_accuracy": {
+          "low": 0.7234009099424595,
+          "high": 0.774559603299293,
+          "valid_resamples": 1000
+        },
+        "final_accuracy": {
+          "low": 0.7698115513295869,
+          "high": 0.816235153727362,
+          "valid_resamples": 1000
+        },
+        "accuracy_delta": {
+          "low": 0.024311824495239828,
+          "high": 0.06646207668608659,
+          "valid_resamples": 1000
+        },
+        "coverage": {
+          "low": 1.0,
+          "high": 1.0,
+          "valid_resamples": 1000
+        },
+        "accepted_accuracy": {
+          "low": 0.7698115513295869,
+          "high": 0.816235153727362,
+          "valid_resamples": 1000
+        }
+      },
+      "warning": "Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included."
+    },
+    "mcnemar": {
+      "baseline_only_correct": 72,
+      "final_only_correct": 129,
+      "p_value": 7.05139453226663e-05,
+      "comparison": "convnext_tiny_lr0.0001 minus ResNet E1 (paired DNN predictions)"
+    },
+    "caveat": "Exploratory development comparison after validation selection; no multiplicity adjustment. McNemar assumes image independence; grouped intervals assume independent pHash groups."
+  },
+  "convnext_tiny_lr0.0001 minus ResNet smoothing": {
+    "grouped_ci": {
+      "method": "paired whole-cluster percentile bootstrap; image-weighted ratios",
+      "group_count": 1206,
+      "image_count": 1273,
+      "resamples": 1000,
+      "seed": 42,
+      "estimable": true,
+      "intervals": {
+        "baseline_accuracy": {
+          "low": 0.7397397233867663,
+          "high": 0.7879788737679492,
+          "valid_resamples": 1000
+        },
+        "final_accuracy": {
+          "low": 0.7698115513295869,
+          "high": 0.816235153727362,
+          "valid_resamples": 1000
+        },
+        "accuracy_delta": {
+          "low": 0.009492735733309336,
+          "high": 0.0510525664187522,
+          "valid_resamples": 1000
+        },
+        "coverage": {
+          "low": 1.0,
+          "high": 1.0,
+          "valid_resamples": 1000
+        },
+        "accepted_accuracy": {
+          "low": 0.7698115513295869,
+          "high": 0.816235153727362,
+          "valid_resamples": 1000
+        }
+      },
+      "warning": "Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included."
+    },
+    "mcnemar": {
+      "baseline_only_correct": 81,
+      "final_only_correct": 119,
+      "p_value": 0.008722501247447707,
+      "comparison": "convnext_tiny_lr0.0001 minus ResNet smoothing (paired DNN predictions)"
+    },
+    "caveat": "Exploratory development comparison after validation selection; no multiplicity adjustment. McNemar assumes image independence; grouped intervals assume independent pHash groups."
+  },
+  "convnext_tiny_lr0.0001 minus efficientnet_b0_lr0.0003": {
+    "grouped_ci": {
+      "method": "paired whole-cluster percentile bootstrap; image-weighted ratios",
+      "group_count": 1206,
+      "image_count": 1273,
+      "resamples": 1000,
+      "seed": 42,
+      "estimable": true,
+      "intervals": {
+        "baseline_accuracy": {
+          "low": 0.7324905131418241,
+          "high": 0.7825093296513788,
+          "valid_resamples": 1000
+        },
+        "final_accuracy": {
+          "low": 0.7698115513295869,
+          "high": 0.816235153727362,
+          "valid_resamples": 1000
+        },
+        "accuracy_delta": {
+          "low": 0.014150110987791283,
+          "high": 0.057364980985812504,
+          "valid_resamples": 1000
+        },
+        "coverage": {
+          "low": 1.0,
+          "high": 1.0,
+          "valid_resamples": 1000
+        },
+        "accepted_accuracy": {
+          "low": 0.7698115513295869,
+          "high": 0.816235153727362,
+          "valid_resamples": 1000
+        }
+      },
+      "warning": "Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included."
+    },
+    "mcnemar": {
+      "baseline_only_correct": 86,
+      "final_only_correct": 132,
+      "p_value": 0.0022312398001912846,
+      "comparison": "convnext_tiny_lr0.0001 minus efficientnet_b0_lr0.0003 (paired DNN predictions)"
+    },
+    "caveat": "Exploratory development comparison after validation selection; no multiplicity adjustment. McNemar assumes image independence; grouped intervals assume independent pHash groups."
+  }
+}
