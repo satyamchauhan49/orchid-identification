@@ -1,7 +1,7 @@
 # orchid-identification
 
 ## Confirmed scope
-Use **all 156 orchid species** in the supplied multi-label dataset. The 63-species figure in the team work plan is an error. The ResNet-18 species head must therefore have 156 outputs. The six feature targets are `T`, `NF`, `In`, `LC`, `CF`, and `CL`.
+Use **all 156 orchid species** in the supplied multi-label dataset. The ResNet-18 species head must therefore have 156 outputs. The six feature targets are `T`, `NF`, `In`, `LC`, `CF`, and `CL`.
 
 ## Dataset facts
 - 7,156 image records in the multi-label CSVs.
@@ -31,7 +31,11 @@ The pHash audit found 446 candidate pairs at Hamming distance <= 4. Connected-co
 
 The pHash algorithm is implemented with OpenCV DCT so the script does not require the `imagehash` package. The threshold is an audit heuristic; manually inspect borderline pairs before making strong claims that every pair is a true duplicate.
 
+The committed training input is `outputs/split_manifest_grouped.csv`. The build scripts generate the intermediate `outputs/split_manifest.csv` and `outputs/combined_labels.csv` from the raw dataset. The CSVs in `outputs/eda/` summarize the original dataset; the command above regenerates EDA from the grouped manifest in `outputs/eda_grouped/`.
+
 ## ResNet-18 baseline
+
+The training script is available. This branch snapshot has no verified baseline metrics or weak-feature experiment results.
 Run on Google Colab with a GPU (recommended):
 ```bash
 python models_resnet/train_resnet.py \
