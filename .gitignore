@@ -37,3 +37,6 @@ env/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Bundled photographs used by the classifier frontend.
+!image_app/assets/*.jpg
