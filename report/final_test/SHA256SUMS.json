@@ -1,0 +1,13 @@
+{
+  "exchange.json": "d0773a0afbe55dfdaef6151707666cb71428c8a8d27ff2d2da529bd515baeab5",
+  "split_manifest.csv": "bf8d843fc84203cd7aea74904aa153d7d5c71a0e1dd9d2861554c6e9d6e5a7a5",
+  "final_results.json.decisions.json": "a427c022646193848ad4db81de00b12a81e80ed661245ba37d6593c0292da83a",
+  "final_results.json.posteriors.npz": "cba3b7c60579994a40d96803c833e6d72eea6779ad2bc8ed6404d127b1b9325f",
+  "taxonomy.json": "07356be22f172b738ebcbce9bbf8913c5fc153f80630121bbd4ab5943b7f6a2e",
+  "READ_ME_FIRST.txt": "7ab516732fd941c4a5ff129be5acadb7e6f3a578e49d9521628a9a75126b02de",
+  "species_id_to_name.json": "66014548ada20ecb4554762bc5132c5ab5cbe6adeedcdc8d785ef090cfd5fa1b",
+  "final_results.json.freeze.json": "d7d23b5fca60f33d1bece2cecfccf504f3a92b80d1236269b945bbcdcc3616c6",
+  "label_maps.json": "c523cf61d55f30f452653056e95e0af92f8dbca9714749e0afae65dc633708cc",
+  "frozen_direct_soft.json": "5920b5ac4dc3faed060b610b71cc78a5d0adea14f7cf3d0b171a8b29212d4852",
+  "final_results.json": "b033641f73dd68366588595f242d06baf42dc6d394132d400688e0d10e3f8e80"
+}

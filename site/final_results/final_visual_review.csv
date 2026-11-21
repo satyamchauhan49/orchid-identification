@@ -1,0 +1,11 @@
+image_id,split,stage,observation,quantitative_localization_measured
+1.jpg,test,deferred,Species and CL overlap lower flowers; CF combines floral and background attention. Broad rather than precise anatomical localization.,False
+12.jpg,test,trusted,Species and CL overlap upper floral regions; CF emphasizes off-flower background. Inconsistent across heads.,False
+17.jpg,test,deferred,Species highlights lower hanging flower and adjacent background; CF/CL include diffuse or peripheral attention.,False
+20.jpg,test,deferred,Maps overlap parts of flower spike and surrounding background. Precise labellum attention not established.,False
+30.jpg,test,deferred,Species/CF overlap flower centre with surrounding attention; CL is peripheral/background-focused.,False
+34.jpg,test,deferred,Species shows off-flower hotspots; CF/CL partly overlap upper flowers with broad surrounding attention.,False
+45.jpg,test,trusted,"Species/CL overlap floral tissue; CF strongest regions include nearby background. CL is broad, not a validated labellum mask.",False
+51.jpg,test,trusted,Species/CL overlap upper flower tissue with background attention; CF includes peripheral background.,False
+54.jpg,test,trusted,Multiple flowers visible; several hotspots are adjacent to flowers or in background. Precise labellum localization not established.,False
+348.jpg,test,auto_resolved,Species overlaps central/upper flower; CF overlaps upper flower with peripheral attention; CL emphasizes lower/peripheral regions. Auto-resolved tag does not prove DNN correction.,False

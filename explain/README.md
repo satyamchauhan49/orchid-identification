@@ -74,3 +74,11 @@ bundle and evaluation, then explain.build_records with taxonomy/reference assets
 Both commands expose --help. A's existing raw exports lack required hashes and
 need provenance-aware re-export before this route can accept them. Never attach
 assumed hashes. Real test records remain gated until the locked team evaluation.
+
+## Verified Agrim E2 candidates
+The shared loader now recognizes plain ResNet and HSV checkpoint architectures,
+including HSV + label smoothing. It calls the original model forward so the
+histogram colour branch is preserved. See report/SNEHA_AGRIM_CHECKPOINT_REVIEW.md
+for actual checkpoint hashes and real validation-image checks.
+For HSV models, these Grad-CAM maps attribute the convolutional branch only;
+they do not spatially explain the discrete colour histogram contribution.

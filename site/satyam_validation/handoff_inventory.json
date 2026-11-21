@@ -1,0 +1,114 @@
+{
+  "mode": "real",
+  "selected_run": "convnext_tiny_lr0.0001",
+  "files": [
+    {
+      "run": "efficientnet_b0_lr0.001",
+      "split": "calib",
+      "rows": 509,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/efficientnet_b0_lr0.001/calib.npz"
+    },
+    {
+      "run": "efficientnet_b0_lr0.001",
+      "split": "val",
+      "rows": 1273,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/efficientnet_b0_lr0.001/val.npz"
+    },
+    {
+      "run": "efficientnet_b0_lr0.001",
+      "split": "test",
+      "rows": "locked: not inspected",
+      "exists": true
+    },
+    {
+      "run": "efficientnet_b0_lr0.0003",
+      "split": "calib",
+      "rows": 509,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/efficientnet_b0_lr0.0003/calib.npz"
+    },
+    {
+      "run": "efficientnet_b0_lr0.0003",
+      "split": "val",
+      "rows": 1273,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/efficientnet_b0_lr0.0003/val.npz"
+    },
+    {
+      "run": "efficientnet_b0_lr0.0003",
+      "split": "test",
+      "rows": "locked: not inspected",
+      "exists": true
+    },
+    {
+      "run": "efficientnet_b0_lr0.0001",
+      "split": "calib",
+      "rows": 509,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/efficientnet_b0_lr0.0001/calib.npz"
+    },
+    {
+      "run": "efficientnet_b0_lr0.0001",
+      "split": "val",
+      "rows": 1273,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/efficientnet_b0_lr0.0001/val.npz"
+    },
+    {
+      "run": "efficientnet_b0_lr0.0001",
+      "split": "test",
+      "rows": "locked: not inspected",
+      "exists": true
+    },
+    {
+      "run": "convnext_tiny_lr0.001",
+      "split": "calib",
+      "rows": 509,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/convnext_tiny_lr0.001/calib.npz"
+    },
+    {
+      "run": "convnext_tiny_lr0.001",
+      "split": "val",
+      "rows": 1273,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/convnext_tiny_lr0.001/val.npz"
+    },
+    {
+      "run": "convnext_tiny_lr0.001",
+      "split": "test",
+      "rows": "locked: not inspected",
+      "exists": true
+    },
+    {
+      "run": "convnext_tiny_lr0.0003",
+      "split": "calib",
+      "rows": 509,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/convnext_tiny_lr0.0003/calib.npz"
+    },
+    {
+      "run": "convnext_tiny_lr0.0003",
+      "split": "val",
+      "rows": 1273,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/convnext_tiny_lr0.0003/val.npz"
+    },
+    {
+      "run": "convnext_tiny_lr0.0003",
+      "split": "test",
+      "rows": "locked: not inspected",
+      "exists": true
+    },
+    {
+      "run": "convnext_tiny_lr0.0001",
+      "split": "calib",
+      "rows": 509,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/convnext_tiny_lr0.0001/calib.npz"
+    },
+    {
+      "run": "convnext_tiny_lr0.0001",
+      "split": "val",
+      "rows": 1273,
+      "path": "/content/drive/MyDrive/Orchid_Sneha/real_grid_v1/convnext_tiny_lr0.0001/val.npz"
+    },
+    {
+      "run": "convnext_tiny_lr0.0001",
+      "split": "test",
+      "rows": "locked: not inspected",
+      "exists": true
+    }
+  ]
+}

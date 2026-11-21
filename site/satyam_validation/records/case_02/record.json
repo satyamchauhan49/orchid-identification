@@ -1,0 +1,353 @@
+{
+  "image_id": "22.jpg",
+  "mode": "real",
+  "split": "val",
+  "image": "input.png",
+  "dnn_candidate": "58",
+  "bn_candidate": "58",
+  "taxonomic": [
+    {
+      "feature": "T",
+      "observed_value": "Spot",
+      "confidence": 0.9757025458991992,
+      "unobserved": false,
+      "expected_dnn": {
+        "Nospot": 0.08333333333333333,
+        "Spot": 0.9166666666666666
+      },
+      "expected_bn": {
+        "Nospot": 0.08333333333333333,
+        "Spot": 0.9166666666666666
+      },
+      "candidate_difference": 0.0
+    },
+    {
+      "feature": "NF",
+      "observed_value": "AFew",
+      "confidence": 0.9464569776975651,
+      "unobserved": false,
+      "expected_dnn": {
+        "AFew": 0.8461538461538461,
+        "Many": 0.07692307692307693,
+        "SinglePair": 0.07692307692307693
+      },
+      "expected_bn": {
+        "AFew": 0.8461538461538461,
+        "Many": 0.07692307692307693,
+        "SinglePair": 0.07692307692307693
+      },
+      "candidate_difference": 0.0
+    },
+    {
+      "feature": "In",
+      "observed_value": "Raceme",
+      "confidence": 0.9369211867278862,
+      "unobserved": false,
+      "expected_dnn": {
+        "Panicle": 0.07142857142857142,
+        "Raceme": 0.7857142857142857,
+        "SingleOrPair": 0.07142857142857142,
+        "Spike": 0.07142857142857142
+      },
+      "expected_bn": {
+        "Panicle": 0.07142857142857142,
+        "Raceme": 0.7857142857142857,
+        "SingleOrPair": 0.07142857142857142,
+        "Spike": 0.07142857142857142
+      },
+      "candidate_difference": 0.0
+    },
+    {
+      "feature": "LC",
+      "observed_value": "Lobed",
+      "confidence": 0.9534061647493071,
+      "unobserved": false,
+      "expected_dnn": {
+        "Fringed": 0.07142857142857142,
+        "Lobed": 0.7857142857142857,
+        "Pouched": 0.07142857142857142,
+        "Simple": 0.07142857142857142
+      },
+      "expected_bn": {
+        "Fringed": 0.07142857142857142,
+        "Lobed": 0.7857142857142857,
+        "Pouched": 0.07142857142857142,
+        "Simple": 0.07142857142857142
+      },
+      "candidate_difference": 0.0
+    },
+    {
+      "feature": "CF",
+      "observed_value": "PinkWhite",
+      "confidence": 0.4642313112376748,
+      "unobserved": false,
+      "expected_dnn": {
+        "Brown": 0.04,
+        "Green": 0.04,
+        "GreenBrown": 0.04,
+        "GreenWhite": 0.04,
+        "GreenYellow": 0.04,
+        "Orange": 0.04,
+        "Pink": 0.04,
+        "PinkWhite": 0.44,
+        "Purple": 0.04,
+        "PurpleWhite": 0.04,
+        "Red": 0.04,
+        "White": 0.04,
+        "Yellow": 0.04,
+        "YellowBrown": 0.04,
+        "YellowPurple": 0.04
+      },
+      "expected_bn": {
+        "Brown": 0.04,
+        "Green": 0.04,
+        "GreenBrown": 0.04,
+        "GreenWhite": 0.04,
+        "GreenYellow": 0.04,
+        "Orange": 0.04,
+        "Pink": 0.04,
+        "PinkWhite": 0.44,
+        "Purple": 0.04,
+        "PurpleWhite": 0.04,
+        "Red": 0.04,
+        "White": 0.04,
+        "Yellow": 0.04,
+        "YellowBrown": 0.04,
+        "YellowPurple": 0.04
+      },
+      "candidate_difference": 0.0
+    },
+    {
+      "feature": "CL",
+      "observed_value": "PinkRedWhite",
+      "confidence": 0.9793139065578177,
+      "unobserved": false,
+      "expected_dnn": {
+        "BluePurple": 0.05,
+        "Green": 0.05,
+        "Orange": 0.05,
+        "PinkRed": 0.05,
+        "PinkRedWhite": 0.55,
+        "PurpleYellow": 0.05,
+        "White": 0.05,
+        "WhiteYellow": 0.05,
+        "Yellow": 0.05,
+        "YellowBrown": 0.05
+      },
+      "expected_bn": {
+        "BluePurple": 0.05,
+        "Green": 0.05,
+        "Orange": 0.05,
+        "PinkRed": 0.05,
+        "PinkRedWhite": 0.55,
+        "PurpleYellow": 0.05,
+        "White": 0.05,
+        "WhiteYellow": 0.05,
+        "Yellow": 0.05,
+        "YellowBrown": 0.05
+      },
+      "candidate_difference": 0.0
+    }
+  ],
+  "contrastive": {
+    "signals": [
+      {
+        "feature": "T",
+        "observed_value": "Spot",
+        "confidence": 0.9757025458991992,
+        "unobserved": false,
+        "expected_dnn": {
+          "Nospot": 0.08333333333333333,
+          "Spot": 0.9166666666666666
+        },
+        "expected_bn": {
+          "Nospot": 0.08333333333333333,
+          "Spot": 0.9166666666666666
+        },
+        "candidate_difference": 0.0
+      },
+      {
+        "feature": "NF",
+        "observed_value": "AFew",
+        "confidence": 0.9464569776975651,
+        "unobserved": false,
+        "expected_dnn": {
+          "AFew": 0.8461538461538461,
+          "Many": 0.07692307692307693,
+          "SinglePair": 0.07692307692307693
+        },
+        "expected_bn": {
+          "AFew": 0.8461538461538461,
+          "Many": 0.07692307692307693,
+          "SinglePair": 0.07692307692307693
+        },
+        "candidate_difference": 0.0
+      },
+      {
+        "feature": "In",
+        "observed_value": "Raceme",
+        "confidence": 0.9369211867278862,
+        "unobserved": false,
+        "expected_dnn": {
+          "Panicle": 0.07142857142857142,
+          "Raceme": 0.7857142857142857,
+          "SingleOrPair": 0.07142857142857142,
+          "Spike": 0.07142857142857142
+        },
+        "expected_bn": {
+          "Panicle": 0.07142857142857142,
+          "Raceme": 0.7857142857142857,
+          "SingleOrPair": 0.07142857142857142,
+          "Spike": 0.07142857142857142
+        },
+        "candidate_difference": 0.0
+      },
+      {
+        "feature": "LC",
+        "observed_value": "Lobed",
+        "confidence": 0.9534061647493071,
+        "unobserved": false,
+        "expected_dnn": {
+          "Fringed": 0.07142857142857142,
+          "Lobed": 0.7857142857142857,
+          "Pouched": 0.07142857142857142,
+          "Simple": 0.07142857142857142
+        },
+        "expected_bn": {
+          "Fringed": 0.07142857142857142,
+          "Lobed": 0.7857142857142857,
+          "Pouched": 0.07142857142857142,
+          "Simple": 0.07142857142857142
+        },
+        "candidate_difference": 0.0
+      },
+      {
+        "feature": "CF",
+        "observed_value": "PinkWhite",
+        "confidence": 0.4642313112376748,
+        "unobserved": false,
+        "expected_dnn": {
+          "Brown": 0.04,
+          "Green": 0.04,
+          "GreenBrown": 0.04,
+          "GreenWhite": 0.04,
+          "GreenYellow": 0.04,
+          "Orange": 0.04,
+          "Pink": 0.04,
+          "PinkWhite": 0.44,
+          "Purple": 0.04,
+          "PurpleWhite": 0.04,
+          "Red": 0.04,
+          "White": 0.04,
+          "Yellow": 0.04,
+          "YellowBrown": 0.04,
+          "YellowPurple": 0.04
+        },
+        "expected_bn": {
+          "Brown": 0.04,
+          "Green": 0.04,
+          "GreenBrown": 0.04,
+          "GreenWhite": 0.04,
+          "GreenYellow": 0.04,
+          "Orange": 0.04,
+          "Pink": 0.04,
+          "PinkWhite": 0.44,
+          "Purple": 0.04,
+          "PurpleWhite": 0.04,
+          "Red": 0.04,
+          "White": 0.04,
+          "Yellow": 0.04,
+          "YellowBrown": 0.04,
+          "YellowPurple": 0.04
+        },
+        "candidate_difference": 0.0
+      },
+      {
+        "feature": "CL",
+        "observed_value": "PinkRedWhite",
+        "confidence": 0.9793139065578177,
+        "unobserved": false,
+        "expected_dnn": {
+          "BluePurple": 0.05,
+          "Green": 0.05,
+          "Orange": 0.05,
+          "PinkRed": 0.05,
+          "PinkRedWhite": 0.55,
+          "PurpleYellow": 0.05,
+          "White": 0.05,
+          "WhiteYellow": 0.05,
+          "Yellow": 0.05,
+          "YellowBrown": 0.05
+        },
+        "expected_bn": {
+          "BluePurple": 0.05,
+          "Green": 0.05,
+          "Orange": 0.05,
+          "PinkRed": 0.05,
+          "PinkRedWhite": 0.55,
+          "PurpleYellow": 0.05,
+          "White": 0.05,
+          "WhiteYellow": 0.05,
+          "Yellow": 0.05,
+          "YellowBrown": 0.05
+        },
+        "candidate_difference": 0.0
+      }
+    ],
+    "references": [
+      {
+        "candidate": "58",
+        "path": "reference_dnn.jpg",
+        "status": "available"
+      },
+      {
+        "candidate": "58",
+        "path": "reference_bn.jpg",
+        "status": "available"
+      }
+    ]
+  },
+  "visual": {
+    "status": "available",
+    "synthetic_checkpoint": false,
+    "overlays": {
+      "species": "cam/species_overlay.png",
+      "CF": "cam/CF_overlay.png",
+      "CL": "cam/CL_overlay.png"
+    },
+    "cam_predictions": {
+      "species": {
+        "class_index": 57,
+        "label": "58",
+        "uncalibrated_confidence": 0.5267528891563416,
+        "all_zero_heatmap": false,
+        "heatmap": "species_heatmap.png",
+        "overlay": "species_overlay.png"
+      },
+      "CF": {
+        "class_index": 7,
+        "label": "PinkWhite",
+        "uncalibrated_confidence": 0.5010495185852051,
+        "all_zero_heatmap": false,
+        "heatmap": "CF_heatmap.png",
+        "overlay": "CF_overlay.png"
+      },
+      "CL": {
+        "class_index": 4,
+        "label": "PinkRedWhite",
+        "uncalibrated_confidence": 0.9948476552963257,
+        "all_zero_heatmap": false,
+        "heatmap": "CL_heatmap.png",
+        "overlay": "CL_overlay.png"
+      }
+    }
+  },
+  "decision": {
+    "stage": "deferred",
+    "fused_confidence": 0.5131952717279612,
+    "final_species": null,
+    "reason": "Frozen C resolver stage low_confidence; weight=1.0; threshold=0.7338323883066077.",
+    "source": "supplied by Satyam's resolver"
+  },
+  "directory": "case_02"
+}

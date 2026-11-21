@@ -91,3 +91,17 @@ final_results.json. The image-upload application is owned separately by Satyam.
 - Verify real Grad-CAM and reference images; generate final records after test freeze.
 - Review A's R2 and C's R4, reliability diagrams and risk-coverage curve.
 - Insert measured results, choose the final model with the team and publish the page.
+
+## Final locked-test outcome (supersedes pending-result statements above)
+The team-selected ConvNeXt-Tiny, learning rate 0.0001, achieved 641/795 correct
+full-coverage predictions: 80.63% test accuracy (grouped 95% CI 77.90–83.48%).
+Top-3 was 92.20%, top-5 94.97%, and macro-F1 0.5502 over all 156 class slots
+(zero-division 0; 135 species represented in test). The frozen selective policy
+accepted 574 images: 541 correct and 33 incorrect, giving 94.25% accepted accuracy
+at 72.20% coverage, with 221 deferred (27.80%). The 1.5% accepted-error target was
+missed (observed 5.75%). Weight 1.0 makes fusion identical to the DNN; no BN gain
+was demonstrated, and auto-resolved tags must not be described as DNN corrections.
+These figures come from Satyam's supplied final_results.json. No test rescoring,
+model change, refitting or threshold tuning was performed for this report import.
+Final visual record generation is prepared and requires the matching Colab checkpoint.
+See final_test/SATYAM_RESULTS.md for uncertainty, limitations and frozen provenance.

@@ -1,0 +1,353 @@
+{
+  "image_id": "1398.jpg",
+  "mode": "real",
+  "split": "val",
+  "image": "input.png",
+  "dnn_candidate": "25",
+  "bn_candidate": "145",
+  "taxonomic": [
+    {
+      "feature": "T",
+      "observed_value": "Nospot",
+      "confidence": 0.7667183525592141,
+      "unobserved": false,
+      "expected_dnn": {
+        "Nospot": 0.14285714285714285,
+        "Spot": 0.8571428571428571
+      },
+      "expected_bn": {
+        "Nospot": 0.9864864864864865,
+        "Spot": 0.013513513513513514
+      },
+      "candidate_difference": 0.8436293436293436
+    },
+    {
+      "feature": "NF",
+      "observed_value": "Many",
+      "confidence": 0.89363443096601,
+      "unobserved": false,
+      "expected_dnn": {
+        "AFew": 0.125,
+        "Many": 0.75,
+        "SinglePair": 0.125
+      },
+      "expected_bn": {
+        "AFew": 0.013333333333333334,
+        "Many": 0.9733333333333334,
+        "SinglePair": 0.013333333333333334
+      },
+      "candidate_difference": 0.22333333333333338
+    },
+    {
+      "feature": "In",
+      "observed_value": "Spike",
+      "confidence": 0.8575072573667348,
+      "unobserved": false,
+      "expected_dnn": {
+        "Panicle": 0.1111111111111111,
+        "Raceme": 0.1111111111111111,
+        "SingleOrPair": 0.1111111111111111,
+        "Spike": 0.6666666666666666
+      },
+      "expected_bn": {
+        "Panicle": 0.013157894736842105,
+        "Raceme": 0.013157894736842105,
+        "SingleOrPair": 0.013157894736842105,
+        "Spike": 0.9605263157894737
+      },
+      "candidate_difference": 0.29385964912280704
+    },
+    {
+      "feature": "LC",
+      "observed_value": "Simple",
+      "confidence": 0.9780480568869169,
+      "unobserved": false,
+      "expected_dnn": {
+        "Fringed": 0.1111111111111111,
+        "Lobed": 0.1111111111111111,
+        "Pouched": 0.1111111111111111,
+        "Simple": 0.6666666666666666
+      },
+      "expected_bn": {
+        "Fringed": 0.013157894736842105,
+        "Lobed": 0.013157894736842105,
+        "Pouched": 0.013157894736842105,
+        "Simple": 0.9605263157894737
+      },
+      "candidate_difference": 0.29385964912280704
+    },
+    {
+      "feature": "CF",
+      "observed_value": "White",
+      "confidence": 0.9858321024603123,
+      "unobserved": false,
+      "expected_dnn": {
+        "Brown": 0.05,
+        "Green": 0.05,
+        "GreenBrown": 0.05,
+        "GreenWhite": 0.05,
+        "GreenYellow": 0.05,
+        "Orange": 0.05,
+        "Pink": 0.05,
+        "PinkWhite": 0.05,
+        "Purple": 0.05,
+        "PurpleWhite": 0.05,
+        "Red": 0.05,
+        "White": 0.3,
+        "Yellow": 0.05,
+        "YellowBrown": 0.05,
+        "YellowPurple": 0.05
+      },
+      "expected_bn": {
+        "Brown": 0.011494252873563218,
+        "Green": 0.011494252873563218,
+        "GreenBrown": 0.011494252873563218,
+        "GreenWhite": 0.011494252873563218,
+        "GreenYellow": 0.011494252873563218,
+        "Orange": 0.011494252873563218,
+        "Pink": 0.011494252873563218,
+        "PinkWhite": 0.011494252873563218,
+        "Purple": 0.011494252873563218,
+        "PurpleWhite": 0.011494252873563218,
+        "Red": 0.011494252873563218,
+        "White": 0.8390804597701149,
+        "Yellow": 0.011494252873563218,
+        "YellowBrown": 0.011494252873563218,
+        "YellowPurple": 0.011494252873563218
+      },
+      "candidate_difference": 0.5390804597701149
+    },
+    {
+      "feature": "CL",
+      "observed_value": "White",
+      "confidence": 0.9897695172690822,
+      "unobserved": false,
+      "expected_dnn": {
+        "BluePurple": 0.06666666666666667,
+        "Green": 0.06666666666666667,
+        "Orange": 0.06666666666666667,
+        "PinkRed": 0.06666666666666667,
+        "PinkRedWhite": 0.06666666666666667,
+        "PurpleYellow": 0.06666666666666667,
+        "White": 0.4,
+        "WhiteYellow": 0.06666666666666667,
+        "Yellow": 0.06666666666666667,
+        "YellowBrown": 0.06666666666666667
+      },
+      "expected_bn": {
+        "BluePurple": 0.012195121951219513,
+        "Green": 0.012195121951219513,
+        "Orange": 0.012195121951219513,
+        "PinkRed": 0.012195121951219513,
+        "PinkRedWhite": 0.012195121951219513,
+        "PurpleYellow": 0.012195121951219513,
+        "White": 0.8902439024390244,
+        "WhiteYellow": 0.012195121951219513,
+        "Yellow": 0.012195121951219513,
+        "YellowBrown": 0.012195121951219513
+      },
+      "candidate_difference": 0.4902439024390243
+    }
+  ],
+  "contrastive": {
+    "signals": [
+      {
+        "feature": "T",
+        "observed_value": "Nospot",
+        "confidence": 0.7667183525592141,
+        "unobserved": false,
+        "expected_dnn": {
+          "Nospot": 0.14285714285714285,
+          "Spot": 0.8571428571428571
+        },
+        "expected_bn": {
+          "Nospot": 0.9864864864864865,
+          "Spot": 0.013513513513513514
+        },
+        "candidate_difference": 0.8436293436293436
+      },
+      {
+        "feature": "CF",
+        "observed_value": "White",
+        "confidence": 0.9858321024603123,
+        "unobserved": false,
+        "expected_dnn": {
+          "Brown": 0.05,
+          "Green": 0.05,
+          "GreenBrown": 0.05,
+          "GreenWhite": 0.05,
+          "GreenYellow": 0.05,
+          "Orange": 0.05,
+          "Pink": 0.05,
+          "PinkWhite": 0.05,
+          "Purple": 0.05,
+          "PurpleWhite": 0.05,
+          "Red": 0.05,
+          "White": 0.3,
+          "Yellow": 0.05,
+          "YellowBrown": 0.05,
+          "YellowPurple": 0.05
+        },
+        "expected_bn": {
+          "Brown": 0.011494252873563218,
+          "Green": 0.011494252873563218,
+          "GreenBrown": 0.011494252873563218,
+          "GreenWhite": 0.011494252873563218,
+          "GreenYellow": 0.011494252873563218,
+          "Orange": 0.011494252873563218,
+          "Pink": 0.011494252873563218,
+          "PinkWhite": 0.011494252873563218,
+          "Purple": 0.011494252873563218,
+          "PurpleWhite": 0.011494252873563218,
+          "Red": 0.011494252873563218,
+          "White": 0.8390804597701149,
+          "Yellow": 0.011494252873563218,
+          "YellowBrown": 0.011494252873563218,
+          "YellowPurple": 0.011494252873563218
+        },
+        "candidate_difference": 0.5390804597701149
+      },
+      {
+        "feature": "CL",
+        "observed_value": "White",
+        "confidence": 0.9897695172690822,
+        "unobserved": false,
+        "expected_dnn": {
+          "BluePurple": 0.06666666666666667,
+          "Green": 0.06666666666666667,
+          "Orange": 0.06666666666666667,
+          "PinkRed": 0.06666666666666667,
+          "PinkRedWhite": 0.06666666666666667,
+          "PurpleYellow": 0.06666666666666667,
+          "White": 0.4,
+          "WhiteYellow": 0.06666666666666667,
+          "Yellow": 0.06666666666666667,
+          "YellowBrown": 0.06666666666666667
+        },
+        "expected_bn": {
+          "BluePurple": 0.012195121951219513,
+          "Green": 0.012195121951219513,
+          "Orange": 0.012195121951219513,
+          "PinkRed": 0.012195121951219513,
+          "PinkRedWhite": 0.012195121951219513,
+          "PurpleYellow": 0.012195121951219513,
+          "White": 0.8902439024390244,
+          "WhiteYellow": 0.012195121951219513,
+          "Yellow": 0.012195121951219513,
+          "YellowBrown": 0.012195121951219513
+        },
+        "candidate_difference": 0.4902439024390243
+      },
+      {
+        "feature": "In",
+        "observed_value": "Spike",
+        "confidence": 0.8575072573667348,
+        "unobserved": false,
+        "expected_dnn": {
+          "Panicle": 0.1111111111111111,
+          "Raceme": 0.1111111111111111,
+          "SingleOrPair": 0.1111111111111111,
+          "Spike": 0.6666666666666666
+        },
+        "expected_bn": {
+          "Panicle": 0.013157894736842105,
+          "Raceme": 0.013157894736842105,
+          "SingleOrPair": 0.013157894736842105,
+          "Spike": 0.9605263157894737
+        },
+        "candidate_difference": 0.29385964912280704
+      },
+      {
+        "feature": "LC",
+        "observed_value": "Simple",
+        "confidence": 0.9780480568869169,
+        "unobserved": false,
+        "expected_dnn": {
+          "Fringed": 0.1111111111111111,
+          "Lobed": 0.1111111111111111,
+          "Pouched": 0.1111111111111111,
+          "Simple": 0.6666666666666666
+        },
+        "expected_bn": {
+          "Fringed": 0.013157894736842105,
+          "Lobed": 0.013157894736842105,
+          "Pouched": 0.013157894736842105,
+          "Simple": 0.9605263157894737
+        },
+        "candidate_difference": 0.29385964912280704
+      },
+      {
+        "feature": "NF",
+        "observed_value": "Many",
+        "confidence": 0.89363443096601,
+        "unobserved": false,
+        "expected_dnn": {
+          "AFew": 0.125,
+          "Many": 0.75,
+          "SinglePair": 0.125
+        },
+        "expected_bn": {
+          "AFew": 0.013333333333333334,
+          "Many": 0.9733333333333334,
+          "SinglePair": 0.013333333333333334
+        },
+        "candidate_difference": 0.22333333333333338
+      }
+    ],
+    "references": [
+      {
+        "candidate": "25",
+        "path": "reference_dnn.jpg",
+        "status": "available"
+      },
+      {
+        "candidate": "145",
+        "path": "reference_bn.jpg",
+        "status": "available"
+      }
+    ]
+  },
+  "visual": {
+    "status": "available",
+    "synthetic_checkpoint": false,
+    "overlays": {
+      "species": "cam/species_overlay.png",
+      "CF": "cam/CF_overlay.png",
+      "CL": "cam/CL_overlay.png"
+    },
+    "cam_predictions": {
+      "species": {
+        "class_index": 24,
+        "label": "25",
+        "uncalibrated_confidence": 0.8894170522689819,
+        "all_zero_heatmap": true,
+        "heatmap": "species_heatmap.png",
+        "overlay": "species_overlay.png"
+      },
+      "CF": {
+        "class_index": 11,
+        "label": "White",
+        "uncalibrated_confidence": 0.9959787130355835,
+        "all_zero_heatmap": false,
+        "heatmap": "CF_heatmap.png",
+        "overlay": "CF_overlay.png"
+      },
+      "CL": {
+        "class_index": 6,
+        "label": "White",
+        "uncalibrated_confidence": 0.9981465339660645,
+        "all_zero_heatmap": true,
+        "heatmap": "CL_heatmap.png",
+        "overlay": "CL_overlay.png"
+      }
+    }
+  },
+  "decision": {
+    "stage": "auto_resolved",
+    "fused_confidence": 0.8286823185419023,
+    "final_species": "25",
+    "reason": "Frozen C resolver stage auto_resolved; weight=1.0; threshold=0.7338323883066077.",
+    "source": "supplied by Satyam's resolver"
+  },
+  "directory": "case_09"
+}
