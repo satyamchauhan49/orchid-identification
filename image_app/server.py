@@ -85,6 +85,12 @@ def handler(predictor):
             self.end_headers();self.wfile.write(payload)
         def do_GET(self):
             if self.path=='/':self.reply(200,Path(__file__).with_name('index.html').read_bytes(),'text/html; charset=utf-8')
+            elif self.path == '/assets/orchid.png':
+                photo = Path(__file__).resolve().parents[1] / 'site/final_results/records/case_06/input.png'
+                if photo.is_file():
+                    self.reply(200, photo.read_bytes(), 'image/png')
+                else:
+                    self.reply(404, dict(error='Not found'))
             elif self.path=='/api/status':self.reply(200,dict(demo=predictor.demo))
             else:self.reply(404,dict(error='Not found'))
         def do_POST(self):
