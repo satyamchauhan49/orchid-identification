@@ -1,0 +1,11 @@
+image_id,path,species,T,LC,In,NF,CL,CF,phash_cluster,split,original_split
+330.jpg,Orchid_Images/330.jpg,11,Nospot,Lobed,Raceme,AFew,PinkRed,Pink,phash_02461,val,train
+2514.jpg,Orchid_Images/2514.jpg,35,Nospot,Pouched,SingleOrPair,SinglePair,PinkRed,White,phash_01643,val,test
+926.jpg,Orchid_Images/926.jpg,19,Spot,Lobed,Raceme,Many,White,YellowBrown,phash_06702,val,train
+6288.jpg,Orchid_Images/6288.jpg,130,Nospot,Simple,Raceme,Many,PinkRed,Red,phash_05601,val,test
+4575.jpg,Orchid_Images/4575.jpg,94,Spot,Simple,Raceme,Many,Green,Green,phash_03841,val,test
+5299.jpg,Orchid_Images/5299.jpg,109,Nospot,Simple,Raceme,AFew,White,White,phash_04562,val,train
+720.jpg,Orchid_Images/720.jpg,16,Nospot,Lobed,SingleOrPair,SinglePair,PinkRedWhite,White,phash_06488,val,val
+6632.jpg,Orchid_Images/6632.jpg,141,Nospot,Simple,Spike,AFew,White,White,phash_05683,val,train
+3991.jpg,Orchid_Images/3991.jpg,65,Nospot,Lobed,Raceme,Many,Green,Green,phash_03202,val,train
+5906.jpg,Orchid_Images/5906.jpg,125,Nospot,Fringed,SingleOrPair,SinglePair,PinkRed,Pink,phash_05197,val,train

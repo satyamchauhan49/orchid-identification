@@ -1,0 +1,11 @@
+image_id,split,review_basis,observation,localization_accuracy_measured
+330.jpg,val,Human-readable qualitative review of supplied overlays,Species map overlaps petals and background; CF/CL predominantly peripheral or background. Precise labellum localization not established.,False
+2514.jpg,val,Human-readable qualitative review of supplied overlays,CL attention overlaps pink pouch; species overlaps upper floral region. CF is broader and includes nearby vegetation. Relevant overlap is qualitative.,False
+926.jpg,val,Human-readable qualitative review of supplied overlays,All maps overlap bud/spike region. Distinct open labellum not assessable in supplied view.,False
+6288.jpg,val,Human-readable qualitative review of supplied overlays,Maps overlap upper flower spike broadly. Individual labellum localization is inconclusive.,False
+4575.jpg,val,Human-readable qualitative review of supplied overlays,Species partly overlaps green spike; CF/CL show substantial surrounding ground/background attention.,False
+5299.jpg,val,Human-readable qualitative review of supplied overlays,Species and CL show hotspots around lower stems/background; CF includes upper/background regions. Precise labellum localization not established.,False
+720.jpg,val,Human-readable qualitative review of supplied overlays,"Some species/CL overlap lower floral region, with substantial background attention; localization is mixed.",False
+6632.jpg,val,Human-readable qualitative review of supplied overlays,Species/CF overlap central spike broadly; CL strongest visible attention lies to the right/background.,False
+3991.jpg,val,Human-readable qualitative review of supplied overlays,Species/CF combine flower/spike overlap with adjacent background; CL has off-flower attention.,False
+5906.jpg,val,Human-readable qualitative review of supplied overlays,Species has some floral overlap and substantial background; CF/CL emphasize foliage/background. Precise labellum localization not established.,False
