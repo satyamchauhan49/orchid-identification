@@ -40,4 +40,12 @@ E2 compared label smoothing, class-balanced sampling, focal loss, an HSV colour 
 - **HSV plus label smoothing** had the highest labellum-colour macro-F1 (**82.99%**), compared with 81.49% for the baseline. Its GreenYellow recall was 71.05%, and its Panicle recall was 65.52%.
 - **Class-balanced sampling** improved GreenYellow recall to 76.32%, while species top-1 fell to 72.90%. Focal loss did not improve recall for GreenYellow or Panicle. The centre-crop proxy yielded 81.30% labellum-colour macro-F1, slightly below the baseline.
 
-The [full R2 table](outputs/orchid-e2/e36dd98/Table_R2.md) includes the per-class true-negative rates. Label smoothing, HSV, and their combination are candidates for downstream comparison. The team will use calibration and resolver performance to select a final model before the locked test evaluation. No test metrics are reported here. See the [E2 handoff guide](E2_HANDOFF.md) for the run configurations and checkpoint-loading instructions.
+The [full R2 table](outputs/orchid-e2/e36dd98/Table_R2.md) includes per-class true-negative rates. The ResNet-18 runs serve as baseline and ablation comparisons. See the [E2 handoff guide](E2_HANDOFF.md) for the ResNet training configurations and checkpoint-loading instructions.
+
+## ConvNeXt locked-test handoff
+
+The team selected **ConvNeXt** for the final evaluation. Sneha owns the ConvNeXt checkpoint and test-logit export. Satyam owns the frozen resolver configuration and locked evaluation.
+
+1. **Sneha** records the selected checkpoint and its SHA-256, exact evaluation preprocessing, class maps, and grouped manifest version.
+2. **Satyam** confirms the ConvNeXt calibration settings, resolver rule, and operating threshold. The team confirms the freeze before anyone opens or scores the test predictions.
+3. **Sneha** exports the selected checkpoint's raw test logits and image IDs and shares the export with Satyam through Drive. The grouped test split has 795 images. **Satyam** verifies the image IDs and class order against the frozen manifest and maps, then runs the locked evaluation.
