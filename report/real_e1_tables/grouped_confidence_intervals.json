@@ -1,0 +1,38 @@
+{
+  "data_kind": "development_validation",
+  "group_column": "phash_cluster",
+  "method": "paired whole-cluster percentile bootstrap; image-weighted ratios",
+  "group_count": 1206,
+  "image_count": 1273,
+  "resamples": 1000,
+  "seed": 42,
+  "estimable": true,
+  "intervals": {
+    "baseline_accuracy": {
+      "low": 0.7234009099424595,
+      "high": 0.774559603299293,
+      "valid_resamples": 1000
+    },
+    "final_accuracy": {
+      "low": 0.7234009099424595,
+      "high": 0.774559603299293,
+      "valid_resamples": 1000
+    },
+    "accuracy_delta": {
+      "low": 0.0,
+      "high": 0.0,
+      "valid_resamples": 1000
+    },
+    "coverage": {
+      "low": 0.5232907936018482,
+      "high": 0.5825535542603052,
+      "valid_resamples": 1000
+    },
+    "accepted_accuracy": {
+      "low": 0.931223252460522,
+      "high": 0.9651832252316895,
+      "valid_resamples": 1000
+    }
+  },
+  "warning": "Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included."
+}
