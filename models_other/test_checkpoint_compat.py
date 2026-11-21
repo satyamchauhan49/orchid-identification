@@ -47,6 +47,19 @@ class CompatibilityTests(unittest.TestCase):
             self.assertEqual(result["preprocessing"],"agrim_v1")
             for head in ("species","CF","CL"):
                 self.assertTrue((root/"cam"/f"{head}_overlay.png").is_file())
+            from explain.check_compatibility import check
+            maps_path=root/"maps.json"
+            maps_path.write_text(json.dumps(self.maps))
+            report=check(root/"a.pt",maps_path,root/"compat.json")
+            self.assertFalse(report["real_image_validation"])
+            changed=json.loads(maps_path.read_text())
+            changed["features"]["CF"].reverse()
+            maps_path.write_text(json.dumps(changed))
+            with self.assertRaises(ValueError): check(root/"a.pt",maps_path,root/"wrong-order.json")
+            checkpoint["std"]=[0,.2,.2]
+            torch.save(checkpoint,root/"bad-norm.pt")
+            with self.assertRaises(ValueError): load_checkpoint(root/"bad-norm.pt")
+            checkpoint["std"]=[.2]*3
             checkpoint["feature_classes"] = {**sizes,"CF":sizes["CF"]+1}
             torch.save(checkpoint,root/"bad.pt")
             with self.assertRaises(ValueError): load_checkpoint(root/"bad.pt")

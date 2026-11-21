@@ -64,9 +64,11 @@ writes test logits but does not report test metrics. `check_dummy` refuses real 
    macro-F1 averages classes present in either predictions or ground truth).
 3. Run the learning-rate comparison for EfficientNet-B0 and ConvNeXt-T.
 4. Integrate Grad-CAM with real images, correct normalization and final checkpoint.
-5. Populate explanation records from Satyam's real BN/resolver results. Reference-image
-   selection and contrastive feature comparison still need implementation.
-6. Draft report and website after the team has real results.
+5. Populate explanation records from Satyam's real BN/resolver results. The reference-image
+   copy and contrastive comparison are implemented; supply actual reference assets.
+6. Methods and website templates are ready; populate measured results after real runs.
 
 Proposed dependencies live only in your folder so they do not replace the team's
 future requirements.txt. No site has been published and no GitHub changes were sent.
+
+For Agrim checkpoint checks and current preprocessing details, see explain/README.md.
