@@ -9,7 +9,8 @@ import numpy as np
 import torch
 from PIL import Image,ImageOps,UnidentifiedImageError
 from torchvision import transforms
-from models_other.train import MultiTaskModel
+from explain.checkpoints import load_checkpoint
+from models_other.preprocessing import image_transform
 from bn_resolver.contracts import load_maps,digest,FEATURES
 from bn_resolver.pipeline import predict
 from bn_resolver.core import resolve
@@ -26,7 +27,7 @@ def decode(data):
                 if im.format not in ('JPEG','PNG'): raise ValueError('Only JPEG and PNG images are supported.')
                 if im.width*im.height>20_000_000: raise ValueError('Image must be at most 20 megapixels.')
                 im.load()
-                return ImageOps.exif_transpose(im).convert('RGB')
+                return im.convert('RGB')  # Match the checkpoint training dataset's pixel orientation.
     except (UnidentifiedImageError,OSError,Image.DecompressionBombError,Image.DecompressionBombWarning) as e:
         raise ValueError('The file is not a valid supported image.') from e
 
@@ -43,18 +44,14 @@ class Predictor:
             # Verify this checkpoint was the calibration source for the frozen head temperatures.
             expected=set(self.artifact['cal_model_ids'])|set(self.artifact['cal_policy_ids'])
             if set(z['ids'].astype(str))!=expected: raise ValueError('Supply matching calibration export, not validation/test')
-        ck=torch.load(checkpoint,map_location='cpu',weights_only=True)
+        self.model,labels,cfg,*_=load_checkpoint(checkpoint)
         expected={'species':self.maps['species'],**self.maps['features']}
-        if ck['labels']!=expected: raise ValueError('Checkpoint labels/order mismatch')
-        cfg=ck['args']
+        if labels!=expected: raise ValueError('Checkpoint labels/order mismatch')
         self.demo=bool(cfg.get('dummy') or cfg.get('demo_data'))
         if not cfg.get('mean') or not cfg.get('std'): raise ValueError('Checkpoint lacks train preprocessing statistics')
-        mean,std=np.asarray(cfg['mean']),np.asarray(cfg['std'])
-        if mean.shape!=(3,) or std.shape!=(3,) or not np.isfinite([mean,std]).all() or (std<=0).any():
-            raise ValueError('Invalid checkpoint normalization statistics')
-        self.model=MultiTaskModel(ck['backbone'],ck['labels'],False)
-        self.model.load_state_dict(ck['model']);self.model.eval()
-        self.transform=transforms.Compose([transforms.Resize((224,224)),transforms.ToTensor(),transforms.Normalize(cfg['mean'],cfg['std'])])
+        self.model.eval()
+        self.preprocessing=cfg['preprocessing']
+        self.transform=image_transform(cfg['mean'],cfg['std'],self.preprocessing,False)
         self.checkpoint_hash=digest(checkpoint)
 
     def infer(self,data):
@@ -71,7 +68,7 @@ class Predictor:
             candidates=[dict(species=self.maps['species'][i],probability=float(fused[0,i])) for i in order],
             features_used={f:bool(used[f][0]) for f in FEATURES},
             note='Synthetic-trained checkpoint: these are demonstration labels, not real orchid identification.' if self.demo else 'Candidate among the trained species only. The model does not verify that an image is an orchid or detect unknown species.',
-            checkpoint_sha256=self.checkpoint_hash)
+            preprocessing=self.preprocessing,checkpoint_sha256=self.checkpoint_hash)
 
 
 def handler(predictor):

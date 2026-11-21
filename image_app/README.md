@@ -26,12 +26,6 @@ with exact label order, stored train mean/std, the matching canonical maps, fitt
 resolver artifact and matching calibration export hashes. Replacing data/checkpoint
 paths does not establish accuracy; real training/evaluation is still required.
 
-Agrim's currently different ResNet checkpoint format and Resize(256)+CenterCrop(224)
-preprocessing are NOT supported by this loader. It intentionally fails on that format
-rather than silently applying B's Resize((224,224)) preprocessing. Coordinate a
-verified adapter once his trained checkpoint is available. Only trusted project
-checkpoints should be loaded; torch weights_only=True is used.
-
 Neither demo nor real mode identifies non-orchids or out-of-set species. Upload only
 images you intend to classify; model confidence is not proof of botanical correctness.
 The server is a single-user local tool, not a public production hosting service.
@@ -42,3 +36,12 @@ Tests:
 Verified: JPEG/PNG decoder, corrupt/unsupported file rejection, same-origin request
 handling, local HTTP upload, and actual integrated synthetic-checkpoint inference.
 No training, commit, push or real test evaluation is performed by this application.
+
+## Updated A/B compatibility
+
+The server now uses explain.checkpoints.load_checkpoint and the shared preprocessing
+profile. Agrim-format ResNet-18 checkpoints are supported with their original crop
+and stored normalization; B's old/new profile is preserved. Supply verified
+fresh calibration exports from bn_resolver.export_development and matching canonical
+maps/artifact. See report/REAL_CHECKPOINT_HANDOFF.md. Decode retains raw image pixel
+orientation to match training; EXIF auto-rotation is not silently added at inference.
