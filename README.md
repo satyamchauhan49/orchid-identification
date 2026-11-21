@@ -64,3 +64,7 @@ The plan mentions weak categories such as `CL GreenRed`. The supplied multi-labe
 - Confusion matrices, per-class TPR/TNR, macro-F1, R1/R2 report sections, README.
 
 Never use the test partition to select models, tune thresholds, or choose experiments.
+
+## Colab E1 sweep
+
+Open Orchid_E1_ResNet18.ipynb in a GPU runtime to reproduce the sweep on the committed grouped manifest. It saves the selected baseline and validation-only R1 tables in Drive under MyDrive/orchid-e1/e36dd98. The older Drive backup used a different grouped split. In the restored Desktop workspace, its original manifest and label maps are under .drive-backup/outputs/.

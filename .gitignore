@@ -37,3 +37,8 @@ env/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Local Drive backup and training runs
+/.drive-backup/
+/outputs/resnet18_*/
+/outputs/label_maps_training.json
