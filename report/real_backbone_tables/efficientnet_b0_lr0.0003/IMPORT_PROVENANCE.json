@@ -1,0 +1,23 @@
+{
+  "kind": "verified_backbone_development_import",
+  "test_opened": false,
+  "original_hashes": {
+    "label_maps_sha256": "c523cf61d55f30f452653056e95e0af92f8dbca9714749e0afae65dc633708cc",
+    "manifest_sha256": "bf8d843fc84203cd7aea74904aa153d7d5c71a0e1dd9d2861554c6e9d6e5a7a5",
+    "checkpoint_sha256": "dd378678bb24f9447d4eda5965d3456b186a5c3163720be717ac52dd4dc9549d"
+  },
+  "canonical_label_maps_sha256": "c523cf61d55f30f452653056e95e0af92f8dbca9714749e0afae65dc633708cc",
+  "adaptation": "Same labels/order; serialization change recorded explicitly",
+  "splits": {
+    "calib": {
+      "rows": 509,
+      "original_sha256": "e035007d7b14593a13c0a7af94b92ad721fadcbae10ed8c5251b9b0c7753e939",
+      "derived_sha256": "9f853723e2e4e90e981bf5016af52eb47ec6c2feaebb601903f62ddea9296b17"
+    },
+    "val": {
+      "rows": 1273,
+      "original_sha256": "ea78540fb7bb197b3ff763fe94a2bbf903f3942d256c56db584fc00536d2d85d",
+      "derived_sha256": "3071120e10d39858c20107091e21134c6c66c1c334c1b745fd06c226dd345bc3"
+    }
+  }
+}

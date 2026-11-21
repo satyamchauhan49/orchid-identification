@@ -1,0 +1,6 @@
+{
+  "expected_sha256": "1a53551ec96b9c7c3d210723187aad775c6e12754bd6e9f522c87cf26f5bac06",
+  "verification": "Matches sender-reported checksum relayed by user; independently computed on received file",
+  "test_file_source": "/Users/satyamchauhan/Downloads/test.npz",
+  "settings_refitted": false
+}

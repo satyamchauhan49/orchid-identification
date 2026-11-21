@@ -1,0 +1,33 @@
+SNEHA MODEL HANDOFF: READY FOR ARRIVAL
+
+Work prepared without additional training or validation tuning:
+- Strict original map/manifest/checkpoint-hash validation of calibration + validation.
+- Class order, exact split IDs, dimensions and finite-logit checks.
+- Explicit normalization of flat/nested map serialization, preserving original hash
+  separately; no invented checkpoint provenance or skipped mismatch checks.
+- One command runs import, all E3-E5, plots, frozen artifact and validation sidecars.
+- Tests verify normal import, changed original map bytes and changed checkpoint.
+
+When ZIP arrives, selectively extract ONLY the intended model's development files,
+checkpoint, original map bytes, manifest and configuration. Do not extract/open test
+predictions. ZIP inventory first: the maps may live outside the model run folder.
+
+Command from the repository root (substitute actual extracted paths):
+
+python -m eval.backbone_handoff --source work/sneha/convnext_tiny_lr0.0001 --original-maps work/sneha/label_maps.json --manifest outputs/split_manifest_grouped.csv --output work/sneha-convnext-v1
+
+Original byte hashes are required. The manifest Git blob currently matches her
+reported source hash, but CRLF Windows copies may not. Use the original bytes rather
+than modifying expected hashes. If a hash is missing/wrong, report it and request
+fresh verified exports; do not weaken the loader.
+
+Use the selected ConvNeXt LR 1e-4 first, then EfficientNet LR 3e-4 if supplied.
+Run each into a distinct output directory. Reconcile macro-F1 definitions before
+cross-model comparisons (C averages all 156 labels; B averages observed labels).
+Validation checkpoint/model selection has already occurred; no final test claim.
+
+After runs: compare DNN/BN/fusion and accepted-risk/coverage, review actual gains and
+failures with the team, verify image/checkpoint linkage and real explanation records,
+then agree model/policy freeze before separately authorized test evaluation.
+
+No training, commit, push or test evaluation was performed to prepare this runner.

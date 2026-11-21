@@ -1,0 +1,85 @@
+AGRIM: SATYAM'S E2 CALIBRATION / RESOLVER HANDOFF
+
+STATUS: READY FOR DEVELOPMENT REVIEW, NOT FINAL TEST RESULTS
+Candidates: label smoothing 0.1; HSV CF/CL; HSV + label smoothing 0.1.
+All use the same grouped manifest: 509 calibration / 1273 validation images.
+Calibration groups: 255 cal_model, 126 cal_fusion, 128 cal_threshold. TRAIN-only
+empirical BN tables use 4579 rows. No test predictions were opened.
+
+VALIDATION COMPARISON (ECE uses 15 bins; lower is better)
+Candidate          Raw DNN ECE  Calibrated ECE  Resolver accuracy  Deferral  Accepted accuracy
+Label smoothing    0.12966      0.03122         76.43%             51.22%    95.65%
+HSV                0.04051      0.03775         75.57%             51.61%    96.43%
+HSV + smoothing    0.12369      0.06454         75.73%             46.50%    96.04%
+
+Resolver accuracy above means proposed accuracy over ALL validation images;
+accepted accuracy is measured only on non-deferred cases. Do not confuse them.
+Counts: smoothing accepts 621 (27 errors), HSV 616 (22 errors), combination 681
+(27 errors). BN-only top-1 is 65.12%, 65.20%, 65.20%, respectively.
+
+CALIBRATION-SUBSET RESULTS
+The selected frozen thresholds are .9293745463, .9251230604, .9308829743.
+On cal_threshold (128 rows), accepted counts/errors were 63/0, 62/0, 71/1.
+Their empirical accepted error is 0%, 0%, 1.41%, respectively. These were selected
+using that same subset and are NOT out-of-sample risk guarantees.
+Calibrated DNN ECE over all cal_threshold rows is .11502, .09974, .08335.
+The attached CALIBRATION_PARTITION_METRICS.csv supplies ECE/NLL/accuracy for all
+three calibration partitions, separately for raw/calibrated DNN, BN and fusion.
+cal_model is used for fitting, cal_fusion for weight, cal_threshold for threshold;
+these are development metrics with fitting/selection reuse, not independent tests.
+Use the independent-of-C-fitting VALIDATION_COMPARISON.csv for the main comparison;
+validation was still used by Agrim for checkpoint/candidate selection.
+
+IMPORTANT INTERPRETATION
+All three select fusion weight w=1.0: resolver probabilities equal calibrated DNN.
+No BN fusion gain is established. Accepted validation errors are 4.35%, 3.57% and
+3.96%; NONE meets the nominal 1.5% target on validation. Thresholds were not retuned
+on validation to hide this failure. Tables/plots remain development-only.
+DNN NLL after temperature: .98842 (smoothing), .93961 (HSV), .94372 (combination).
+The combination has best BN ECE (.05030), but not best DNN ECE or species accuracy.
+The 0.4 missing-evidence rule and prespecified direct-soft BN are held consistent.
+
+RECOMMENDATION TO AGRIM
+For the primary ResNet accuracy/calibration candidate, retain LABEL SMOOTHING:
+highest species top-1 (76.43%) and lowest calibrated DNN ECE (.03122) among these
+three. Keep HSV as a useful alternative for lower DNN NLL and higher accepted
+accuracy at almost the same coverage; it is not dominated in every metric.
+Do not automatically choose HSV+smoothing solely because it combines interventions:
+it increases coverage to 53.50% but has weaker calibrated DNN ECE (.06454).
+This is a provisional development recommendation, not final-test superiority.
+Across all supplied backbones, Sneha's ConvNeXt leads DNN validation at 79.42%; the
+team should review that candidate before any final model freeze.
+
+CHECKPOINT / HSV LOADING STATUS
+All three supplied best.pt files load and produce seven correctly shaped finite
+heads on artificial inputs. CHECKPOINT_LOADING.json records the actual checks.
+HSV is loaded using Agrim's published 48-bin architecture with only its Python
+import adapted to package form. The shared wrapper now calls the actual forward,
+so it does not bypass histogram inputs to CF/CL. An exact-forward regression test
+covers all heads and embeddings. Standard crop/normalization is preserved.
+
+GRAD-CAM STATUS / ISSUES
+No real-image Grad-CAM was generated for these HSV checkpoints in this analysis;
+source dataset pixels were not supplied. Loading success and artificial forward
+checks do NOT establish useful attention or labellum localization. Sneha should
+inspect real matched image/checkpoint maps and report background-focused cases.
+Her separately reviewed ConvNeXt maps had variable localization; that is not evidence
+about these HSV candidates. Histogram effects are not fully explained by a spatial
+backbone Grad-CAM, so do not interpret a colour-head overlay as the full explanation.
+
+PROVENANCE LIMITATION
+Original A exports omit exporter hashes. IDs, all target labels, class order,
+checkpoint class maps and finite arrays were checked. Derived files retain explicit
+post-hoc map binding; logits-to-checkpoint linkage remains UNVERIFIED without a
+fresh image/checkpoint re-export. No guessed hash was added. Per-candidate
+IMPORT_PROVENANCE.json is included. No test file, checkpoint or NPZ is in this ZIP.
+
+CONTENTS
+- This handoff; VALIDATION_COMPARISON.csv; CALIBRATION_PARTITION_METRICS.csv.
+- CHECKPOINT_LOADING.json and checksums.
+- Per candidate: R3/E3, E4, R4/E5, grouped confidence intervals, three plots and
+  import provenance. Exact CSV values take precedence over rounded prose.
+
+Remaining team steps: agree final backbone/operating point, verify strong provenance
+and real explanations, then explicitly freeze before the separately authorized
+locked test. No final_results.json has been created. No commit/push performed.

@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "scope": "software compatibility on artificial inputs only",
+  "real_image_validation": false,
+  "accuracy_evaluated": false,
+  "backbone": "efficientnet_b0",
+  "preprocessing": "agrim_v1",
+  "target_layer": "backbone.conv_head",
+  "normalization": {
+    "mean": [
+      0.40453335642814636,
+      0.4082944095134735,
+      0.2660682499408722
+    ],
+    "std": [
+      0.2277458906173706,
+      0.21494299173355103,
+      0.22625732421875
+    ]
+  },
+  "output_shapes": {
+    "species": [
+      2,
+      156
+    ],
+    "T": [
+      2,
+      2
+    ],
+    "NF": [
+      2,
+      3
+    ],
+    "In": [
+      2,
+      4
+    ],
+    "LC": [
+      2,
+      4
+    ],
+    "CF": [
+      2,
+      15
+    ],
+    "CL": [
+      2,
+      10
+    ]
+  },
+  "checkpoint_sha256": "dd378678bb24f9447d4eda5965d3456b186a5c3163720be717ac52dd4dc9549d",
+  "label_maps_sha256": "c523cf61d55f30f452653056e95e0af92f8dbca9714749e0afae65dc633708cc"
+}

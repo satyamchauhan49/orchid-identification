@@ -1,0 +1,7 @@
+{
+  "selection_sha256": "eb075d56cedd661acc641705d52380f096fde38c1e87f8c536afacfcadd3734a",
+  "test_bundle_sha256": "1a53551ec96b9c7c3d210723187aad775c6e12754bd6e9f522c87cf26f5bac06",
+  "model": "convnext_tiny_lr0.0001",
+  "policy_refitted": false,
+  "code_verified": true
+}

@@ -1,0 +1,18 @@
+Run from /Users/satyamchauhan/Documents/Codex/orchid-real-handoff
+
+python -m eval.e2_archive --archive /Users/satyamchauhan/Downloads/e36dd98-2.zip --maps work/e1-real-metadata/label_maps.json --manifest outputs/split_manifest_grouped.csv --output work/e2-real-v2
+python -m eval.e2_report --root work/e2-real-v2 --maps work/e1-real-metadata/label_maps.json --manifest outputs/split_manifest_grouped.csv --baseline-bundle work/e1-audited-input/val.npz --baseline-artifact work/e1-real-experiments-01/frozen_direct_soft.json
+
+Use the prepared integration Python environment or install shared requirements first.
+Use a new output folder; prior artifacts are protected. Maps and E1 inputs were
+prepared in the prior audit and must retain exact bytes. No test path is accepted.
+
+Push-ready source files: eval/e2_archive.py, eval/e2_report.py,
+explain/checkpoints.py, models_resnet/model_hsv_colab.py,
+tests/test_hsv_handoff.py, report/REAL_E2_RESULTS.md, report/real_e2_tables/,
+and this instruction file. Existing team code is retained; HSV import is adapted
+for package execution. Nothing has been committed or pushed.
+
+Generated sidecars under work/e2-real-v1 are shareable separately. Their legacy
+checkpoint linkage remains unverified; do not bypass the strict explanation adapter.
+Crop-model online preprocessing must be reviewed before enabling upload inference.

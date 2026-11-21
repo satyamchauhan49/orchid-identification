@@ -1,0 +1,57 @@
+AGREED MODEL: CONVNEXT-TINY, LR=0.0001
+
+Model selected by the team. No retraining or validation retuning was performed.
+The existing development calibration artifact is preserved exactly:
+  weight = 1.0
+  threshold = 0.7338323883066077
+  evidence = direct_soft, confidence mask = 0.4
+  species count = 156
+  inference = agrim_v1 Resize(256), CenterCrop(224), stored TRAIN normalization
+
+Selection/file hashes: report/CONVNEXT_FINAL_SELECTION.json.
+The model decision is agreed; this does not assert the validation risk target was met.
+Existing operating point is retained, not silently adjusted to improve validation.
+The current code includes uncommitted changes and must be reviewed/committed for
+release. Content hashes detect changes even before commit. Any intentional change
+requires documented review before a new freeze, never after test-based tuning.
+
+CURRENT VALIDATION EVIDENCE
+1273 rows: top-1 79.42%, top-3 93.17%, top-5 96.07%; common 156-class macro-F1 .5969.
+BN top-1 70.07%. Fusion w=1 means DNN-only; do not claim BN fusion improved accuracy.
+885 accepted, 49 errors: coverage 69.52%, deferral 30.48%, accepted accuracy 94.46%.
+Validation accepted error 5.54% exceeds nominal 1.5%; this must be disclosed.
+Optional arbiter is exploratory and NOT promoted into this main policy.
+Final test metrics are not known. No final_results.json was manufactured.
+
+NEEDED FROM SNEHA
+Send test.npz from the SAME convnext_tiny_lr0.0001 run as the received best.pt,
+with no retraining/reselection. Include its SHA-256 in the handoff; keep original
+NPZ provenance fields label_maps_sha256, manifest_sha256, checkpoint_sha256.
+Expected test membership is 795 rows in the shared manifest. Do not substitute
+ResNet test arrays or validation outputs. Test images are not needed if this exact
+checkpoint's original raw test logits already exist. Do not send or read test metrics
+for selecting/tuning settings.
+
+AFTER RECEIPT AND TEAM FINAL-PROTOCOL AGREEMENT
+From /Users/satyamchauhan/Documents/Codex/orchid-real-handoff, using the prepared
+Python environment and an original verified test.npz path:
+
+python -m eval.final_convnext --freeze report/CONVNEXT_FINAL_SELECTION.json --repo . --bundle work/sneha-test/test.npz --output eval/final_results.json --unlock-test
+
+Do NOT run until the real test file arrives. The script verifies selected file/code
+hashes and test export provenance, then uses the existing evaluator's exact test ID
+checks. It performs no fitting, no threshold search and no model selection, and
+refuses to overwrite final results. No test file has been opened so far.
+
+AFTER FINAL EVALUATION
+- Preserve JSON, CIs, paired test comparison and decision/posterior sidecars.
+- Complete the report/PPT final table and final best-model paragraph from saved JSON.
+- Give Sneha verified final decision/posterior sidecars for final explanation records.
+- Document failures and necessary technical reruns; do not hide test-driven changes.
+- Review code/results together, fresh-clone on another machine, then merge to main.
+
+CURRENTLY AVAILABLE
+Real ConvNeXt uploads: http://127.0.0.1:8766 while server is running.
+Restart with python -m image_app.start_received --port 8766.
+Validation explanation handoff and full development report are in this chat's
+Orchid_Real_Team_Results output package. No public deployment was performed.

@@ -33,9 +33,12 @@ def decode(data):
 
 
 class Predictor:
-    def __init__(self,maps,checkpoint,artifact,bundle):
+    def __init__(self,maps,checkpoint,artifact,bundle,species_names=None):
         torch.set_num_threads(2)
         self.maps=load_maps(maps)
+        self.species_names={} if species_names is None else json.loads(Path(species_names).read_text())
+        if species_names is not None and (not isinstance(self.species_names,dict) or any(not isinstance(self.species_names.get(k),str) for k in self.maps['species'])):
+            raise ValueError('Species display-name map must cover every class ID')
         self.artifact=json.loads(Path(artifact).read_text())
         if self.artifact['label_maps_sha256']!=digest(maps): raise ValueError('Resolver class-map hash mismatch')
         with np.load(bundle,allow_pickle=False) as z:
@@ -63,11 +66,11 @@ class Predictor:
         policy=self.artifact['policy']
         fused,proposal,accepted,stages=resolve(d,b,policy['weight'],policy['threshold'])
         order=np.argsort(-fused[0],kind='stable')[:5]
-        return dict(demo=self.demo,accepted_species=self.maps['species'][int(proposal[0])] if accepted[0] else None,
+        return dict(demo=self.demo,accepted_name=self.species_names.get(self.maps['species'][int(proposal[0])]) if accepted[0] else None,accepted_species=self.maps['species'][int(proposal[0])] if accepted[0] else None,
             stage=str(stages[0]),confidence=float(fused[0].max()),
-            candidates=[dict(species=self.maps['species'][i],probability=float(fused[0,i])) for i in order],
+            candidates=[dict(species=self.maps['species'][i],display_name=self.species_names.get(self.maps['species'][i],self.maps['species'][i]),probability=float(fused[0,i])) for i in order],
             features_used={f:bool(used[f][0]) for f in FEATURES},
-            note='Synthetic-trained checkpoint: these are demonstration labels, not real orchid identification.' if self.demo else 'Candidate among the trained species only. The model does not verify that an image is an orchid or detect unknown species.',
+            note='Synthetic-trained checkpoint: these are demonstration labels, not real orchid identification.' if self.demo else 'Development model: not yet final-test validated. The nominal 1.5% accepted-error target was not met on validation. Candidates cover trained species only; non-orchids and unknown species are not detected.',
             preprocessing=self.preprocessing,checkpoint_sha256=self.checkpoint_hash)
 
 
@@ -105,8 +108,9 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ('maps','checkpoint','artifact','calibration-bundle'):p.add_argument('--'+key,required=True)
     p.add_argument('--port',type=int,default=8765)
+    p.add_argument('--species-names',help='Optional JSON mapping class IDs to botanical display names')
     a=p.parse_args()
-    model=Predictor(a.maps,a.checkpoint,a.artifact,a.calibration_bundle)
+    model=Predictor(a.maps,a.checkpoint,a.artifact,a.calibration_bundle,a.species_names)
     server=HTTPServer(('127.0.0.1',a.port),handler(model))
     print(f'Image upload ready: http://127.0.0.1:{a.port} — '+('SYNTHETIC DEMO' if model.demo else 'trained model'),flush=True)
     server.serve_forever()

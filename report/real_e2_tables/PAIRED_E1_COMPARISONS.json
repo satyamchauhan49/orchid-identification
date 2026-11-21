@@ -1,0 +1,272 @@
+{
+  "resnet18_e2_balanced_cf_in": {
+    "dnn_vs_E1": {
+      "method": "paired whole-cluster percentile bootstrap; image-weighted ratios",
+      "group_count": 1206,
+      "image_count": 1273,
+      "resamples": 1000,
+      "seed": 42,
+      "estimable": true,
+      "intervals": {
+        "baseline_accuracy": {
+          "low": 0.7234009099424595,
+          "high": 0.774559603299293,
+          "valid_resamples": 1000
+        },
+        "final_accuracy": {
+          "low": 0.7029732644583985,
+          "high": 0.7533642743767701,
+          "valid_resamples": 1000
+        },
+        "accuracy_delta": {
+          "low": -0.040657901879898005,
+          "high": 0.0015613718742326476,
+          "valid_resamples": 1000
+        },
+        "coverage": {
+          "low": 1.0,
+          "high": 1.0,
+          "valid_resamples": 1000
+        },
+        "accepted_accuracy": {
+          "low": 0.7029732644583985,
+          "high": 0.7533642743767701,
+          "valid_resamples": 1000
+        }
+      },
+      "warning": "Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included."
+    },
+    "mcnemar": {
+      "baseline_only_correct": 95,
+      "final_only_correct": 69,
+      "p_value": 0.050585668313249496,
+      "comparison": "Full-coverage baseline versus full-coverage fusion"
+    },
+    "caveat": "Exploratory paired validation comparison after model selection; no multiplicity correction or final test claim."
+  },
+  "resnet18_e2_focal_gamma2": {
+    "dnn_vs_E1": {
+      "method": "paired whole-cluster percentile bootstrap; image-weighted ratios",
+      "group_count": 1206,
+      "image_count": 1273,
+      "resamples": 1000,
+      "seed": 42,
+      "estimable": true,
+      "intervals": {
+        "baseline_accuracy": {
+          "low": 0.7234009099424595,
+          "high": 0.774559603299293,
+          "valid_resamples": 1000
+        },
+        "final_accuracy": {
+          "low": 0.7200283967516077,
+          "high": 0.7701363501891257,
+          "valid_resamples": 1000
+        },
+        "accuracy_delta": {
+          "low": -0.019577517472131774,
+          "high": 0.012751637037000248,
+          "valid_resamples": 1000
+        },
+        "coverage": {
+          "low": 1.0,
+          "high": 1.0,
+          "valid_resamples": 1000
+        },
+        "accepted_accuracy": {
+          "low": 0.7200283967516077,
+          "high": 0.7701363501891257,
+          "valid_resamples": 1000
+        }
+      },
+      "warning": "Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included."
+    },
+    "mcnemar": {
+      "baseline_only_correct": 57,
+      "final_only_correct": 53,
+      "p_value": 0.7750029828306004,
+      "comparison": "Full-coverage baseline versus full-coverage fusion"
+    },
+    "caveat": "Exploratory paired validation comparison after model selection; no multiplicity correction or final test claim."
+  },
+  "resnet18_e2_hsv_cf_cl": {
+    "dnn_vs_E1": {
+      "method": "paired whole-cluster percentile bootstrap; image-weighted ratios",
+      "group_count": 1206,
+      "image_count": 1273,
+      "resamples": 1000,
+      "seed": 42,
+      "estimable": true,
+      "intervals": {
+        "baseline_accuracy": {
+          "low": 0.7234009099424595,
+          "high": 0.774559603299293,
+          "valid_resamples": 1000
+        },
+        "final_accuracy": {
+          "low": 0.7278276905559784,
+          "high": 0.7793608275924327,
+          "valid_resamples": 1000
+        },
+        "accuracy_delta": {
+          "low": -0.013406940063091403,
+          "high": 0.024526288140183265,
+          "valid_resamples": 1000
+        },
+        "coverage": {
+          "low": 1.0,
+          "high": 1.0,
+          "valid_resamples": 1000
+        },
+        "accepted_accuracy": {
+          "low": 0.7278276905559784,
+          "high": 0.7793608275924327,
+          "valid_resamples": 1000
+        }
+      },
+      "warning": "Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included."
+    },
+    "mcnemar": {
+      "baseline_only_correct": 71,
+      "final_only_correct": 79,
+      "p_value": 0.5677754876753991,
+      "comparison": "Full-coverage baseline versus full-coverage fusion"
+    },
+    "caveat": "Exploratory paired validation comparison after model selection; no multiplicity correction or final test claim."
+  },
+  "resnet18_e2_hsv_smoothing_0p1": {
+    "dnn_vs_E1": {
+      "method": "paired whole-cluster percentile bootstrap; image-weighted ratios",
+      "group_count": 1206,
+      "image_count": 1273,
+      "resamples": 1000,
+      "seed": 42,
+      "estimable": true,
+      "intervals": {
+        "baseline_accuracy": {
+          "low": 0.7234009099424595,
+          "high": 0.774559603299293,
+          "valid_resamples": 1000
+        },
+        "final_accuracy": {
+          "low": 0.7298318507732967,
+          "high": 0.7806302478691814,
+          "valid_resamples": 1000
+        },
+        "accuracy_delta": {
+          "low": -0.01256873527101332,
+          "high": 0.02652209682137293,
+          "valid_resamples": 1000
+        },
+        "coverage": {
+          "low": 1.0,
+          "high": 1.0,
+          "valid_resamples": 1000
+        },
+        "accepted_accuracy": {
+          "low": 0.7298318507732967,
+          "high": 0.7806302478691814,
+          "valid_resamples": 1000
+        }
+      },
+      "warning": "Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included."
+    },
+    "mcnemar": {
+      "baseline_only_correct": 73,
+      "final_only_correct": 83,
+      "p_value": 0.471286103219631,
+      "comparison": "Full-coverage baseline versus full-coverage fusion"
+    },
+    "caveat": "Exploratory paired validation comparison after model selection; no multiplicity correction or final test claim."
+  },
+  "resnet18_e2_label_smoothing_0p1": {
+    "dnn_vs_E1": {
+      "method": "paired whole-cluster percentile bootstrap; image-weighted ratios",
+      "group_count": 1206,
+      "image_count": 1273,
+      "resamples": 1000,
+      "seed": 42,
+      "estimable": true,
+      "intervals": {
+        "baseline_accuracy": {
+          "low": 0.7234009099424595,
+          "high": 0.774559603299293,
+          "valid_resamples": 1000
+        },
+        "final_accuracy": {
+          "low": 0.7397397233867663,
+          "high": 0.7879788737679492,
+          "valid_resamples": 1000
+        },
+        "accuracy_delta": {
+          "low": -0.0024122184578024607,
+          "high": 0.03191075514874143,
+          "valid_resamples": 1000
+        },
+        "coverage": {
+          "low": 1.0,
+          "high": 1.0,
+          "valid_resamples": 1000
+        },
+        "accepted_accuracy": {
+          "low": 0.7397397233867663,
+          "high": 0.7879788737679492,
+          "valid_resamples": 1000
+        }
+      },
+      "warning": "Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included."
+    },
+    "mcnemar": {
+      "baseline_only_correct": 54,
+      "final_only_correct": 73,
+      "p_value": 0.10984950256605935,
+      "comparison": "Full-coverage baseline versus full-coverage fusion"
+    },
+    "caveat": "Exploratory paired validation comparison after model selection; no multiplicity correction or final test claim."
+  },
+  "resnet18_e2_labellum_center_crop": {
+    "dnn_vs_E1": {
+      "method": "paired whole-cluster percentile bootstrap; image-weighted ratios",
+      "group_count": 1206,
+      "image_count": 1273,
+      "resamples": 1000,
+      "seed": 42,
+      "estimable": true,
+      "intervals": {
+        "baseline_accuracy": {
+          "low": 0.7234009099424595,
+          "high": 0.774559603299293,
+          "valid_resamples": 1000
+        },
+        "final_accuracy": {
+          "low": 0.7195398419088767,
+          "high": 0.7677434865130183,
+          "valid_resamples": 1000
+        },
+        "accuracy_delta": {
+          "low": -0.023330425661328404,
+          "high": 0.01493828492351648,
+          "valid_resamples": 1000
+        },
+        "coverage": {
+          "low": 1.0,
+          "high": 1.0,
+          "valid_resamples": 1000
+        },
+        "accepted_accuracy": {
+          "low": 0.7195398419088767,
+          "high": 0.7677434865130183,
+          "valid_resamples": 1000
+        }
+      },
+      "warning": "Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included."
+    },
+    "mcnemar": {
+      "baseline_only_correct": 76,
+      "final_only_correct": 70,
+      "p_value": 0.6791635203785426,
+      "comparison": "Full-coverage baseline versus full-coverage fusion"
+    },
+    "caveat": "Exploratory paired validation comparison after model selection; no multiplicity correction or final test claim."
+  }
+}

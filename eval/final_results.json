@@ -1,0 +1,156 @@
+{
+  "split": "test",
+  "kind": "measured_predictions",
+  "n": 795,
+  "artifact_sha256": "5920b5ac4dc3faed060b610b71cc78a5d0adea14f7cf3d0b171a8b29212d4852",
+  "bundle_sha256": "1a53551ec96b9c7c3d210723187aad775c6e12754bd6e9f522c87cf26f5bac06",
+  "dnn": {
+    "n": 795,
+    "accuracy": 0.8062893081761007,
+    "top3": 0.9220125786163522,
+    "top5": 0.949685534591195,
+    "macro_f1": 0.5502028761287457,
+    "macro_f1_zero_division": 0,
+    "nll": 0.7338436309669291,
+    "ece": 0.0333209758640495,
+    "accepted": 795,
+    "coverage": 1.0,
+    "deferral_rate": 0.0,
+    "accepted_accuracy": 0.8062893081761007
+  },
+  "bn": {
+    "n": 795,
+    "accuracy": 0.6981132075471698,
+    "top3": 0.8188679245283019,
+    "top5": 0.8553459119496856,
+    "macro_f1": 0.3528030151327747,
+    "macro_f1_zero_division": 0,
+    "nll": 1.2875267782747168,
+    "ece": 0.07119605841690864,
+    "accepted": 795,
+    "coverage": 1.0,
+    "deferral_rate": 0.0,
+    "accepted_accuracy": 0.6981132075471698
+  },
+  "rank_rule": {
+    "n": 795,
+    "accuracy": 0.8062893081761007,
+    "top3": 0.9220125786163522,
+    "top5": 0.949685534591195,
+    "macro_f1": 0.5502028761287457,
+    "macro_f1_zero_division": 0,
+    "nll": 0.7338436309669291,
+    "ece": 0.0333209758640495,
+    "accepted": 741,
+    "coverage": 0.9320754716981132,
+    "deferral_rate": 0.06792452830188678,
+    "accepted_accuracy": 0.8313090418353576
+  },
+  "fusion": {
+    "n": 795,
+    "accuracy": 0.8062893081761007,
+    "top3": 0.9220125786163522,
+    "top5": 0.949685534591195,
+    "macro_f1": 0.5502028761287457,
+    "macro_f1_zero_division": 0,
+    "nll": 0.7338436309669291,
+    "ece": 0.0333209758640495,
+    "accepted": 795,
+    "coverage": 1.0,
+    "deferral_rate": 0.0,
+    "accepted_accuracy": 0.8062893081761007
+  },
+  "selective": {
+    "n": 795,
+    "accuracy": 0.8062893081761007,
+    "top3": 0.9220125786163522,
+    "top5": 0.949685534591195,
+    "macro_f1": 0.5502028761287457,
+    "macro_f1_zero_division": 0,
+    "nll": 0.7338436309669291,
+    "ece": 0.0333209758640495,
+    "accepted": 574,
+    "coverage": 0.7220125786163522,
+    "deferral_rate": 0.27798742138364785,
+    "accepted_accuracy": 0.9425087108013938
+  },
+  "policy": {
+    "weight": 1.0,
+    "threshold": 0.7338323883066077,
+    "feasible": true,
+    "target": 0.015,
+    "minimum_accepted": 50,
+    "calibration_selection": {
+      "threshold": 0.7338323883066077,
+      "accepted": 86,
+      "errors": 1,
+      "coverage": 0.671875,
+      "risk": 0.011627906976744186
+    },
+    "limitation": "Weight fit and threshold selection use disjoint duplicate groups; empirical selected risk is not guaranteed."
+  },
+  "grouped_confidence_intervals": {
+    "group_column": "phash_cluster",
+    "method": "paired whole-cluster percentile bootstrap; image-weighted ratios",
+    "group_count": 753,
+    "image_count": 795,
+    "resamples": 1000,
+    "seed": 42,
+    "estimable": true,
+    "intervals": {
+      "baseline_accuracy": {
+        "low": 0.7790190414022028,
+        "high": 0.8347983443945131,
+        "valid_resamples": 1000
+      },
+      "final_accuracy": {
+        "low": 0.7790190414022028,
+        "high": 0.8347983443945131,
+        "valid_resamples": 1000
+      },
+      "accuracy_delta": {
+        "low": 0.0,
+        "high": 0.0,
+        "valid_resamples": 1000
+      },
+      "coverage": {
+        "low": 0.6867925015413071,
+        "high": 0.7575539061807779,
+        "valid_resamples": 1000
+      },
+      "accepted_accuracy": {
+        "low": 0.9209104031040373,
+        "high": 0.9625016711229947,
+        "valid_resamples": 1000
+      }
+    },
+    "warning": "Assumes independent clusters; fewer clusters give unstable intervals. Predictions and policy are frozen. No selection or training uncertainty included."
+  },
+  "accuracy_ci": {
+    "low": 0.7786163522012579,
+    "high": 0.8314779874213837,
+    "valid_resamples": 1000,
+    "resamples": 1000,
+    "seed": 42,
+    "method": "IID image percentile bootstrap; requires independent image units"
+  },
+  "accepted_accuracy_ci": {
+    "low": 0.9209126196406671,
+    "high": 0.9604164759995631,
+    "valid_resamples": 1000,
+    "resamples": 1000,
+    "seed": 42,
+    "method": "IID image percentile bootstrap; requires independent image units"
+  },
+  "mcnemar": {
+    "baseline_only_correct": 0,
+    "final_only_correct": 0,
+    "p_value": 1.0,
+    "comparison": "Full-coverage baseline versus full-coverage fusion"
+  },
+  "limitations": [
+    "IID CIs and McNemar assume independent images; use grouped intervals for correlated images. Groups themselves must be independent.",
+    "Empirical theta needs adequate TRAIN feature annotations.",
+    "Calibration selection is not a guarantee of test risk."
+  ]
+}

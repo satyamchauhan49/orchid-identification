@@ -1,0 +1,21 @@
+{
+  "kind": "audited_legacy_development_import",
+  "checkpoint_linkage": "UNVERIFIED: arrays lack exporter hashes; checkpoint and maps supplied together",
+  "canonical_map_binding": "Post-hoc verified class order and manifest target agreement; not an original exporter attestation",
+  "supplied_checkpoint_sha256": "89324201b2994278b554be8e88f90bb7ce09326b13f03927d3c6782b92acb670",
+  "class_maps_sha256": "8c56ceb1422d5dfd27c133c2527ed985ca3965db170054077569d08092664d3b",
+  "manifest_sha256": "bf8d843fc84203cd7aea74904aa153d7d5c71a0e1dd9d2861554c6e9d6e5a7a5",
+  "test_opened": false,
+  "splits": {
+    "calib": {
+      "rows": 509,
+      "original_sha256": "18180345631453349fd67818e6c720cd916eeab497021017d25ac3304976457c",
+      "derived_sha256": "b55a8b20dfe0b5ede10f8010580431f5d853dc570a37fe35b9eabdd653a18aba"
+    },
+    "val": {
+      "rows": 1273,
+      "original_sha256": "b83b010299337453ffa71eae9b97a86e7f5d1449a0917d00cefda36cfdfdec05",
+      "derived_sha256": "dd0077853f78d1d31761217b2dc1353b19a2f29b64054d631c5337da8def7016"
+    }
+  }
+}

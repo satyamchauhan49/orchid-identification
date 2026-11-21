@@ -45,3 +45,18 @@ and stored normalization; B's old/new profile is preserved. Supply verified
 fresh calibration exports from bn_resolver.export_development and matching canonical
 maps/artifact. See report/REAL_CHECKPOINT_HANDOFF.md. Decode retains raw image pixel
 orientation to match training; EXIF auto-rotation is not silently added at inference.
+
+## Received real ConvNeXt development model
+
+After verifying Sneha's handoff and running eval.backbone_handoff, start:
+
+```sh
+python -m image_app.start_received --port 8766
+```
+
+This uses work/sneha-received/convnext_tiny_lr0.0001 and its matching
+work/sneha-analysis artifacts. Open http://127.0.0.1:8766. Class-ID display names
+are loaded from outputs/species_id_to_name.json without changing prediction order.
+The real-model UI explicitly says development validation only and reports the unmet
+risk target. This is not a final-model freeze or a non-orchid detector. For a different
+installation, use image_app.server with explicit model/artifact/bundle/name paths.
